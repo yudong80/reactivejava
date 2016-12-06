@@ -1,7 +1,14 @@
 package com.yudong80.reactivejava.chapter01;
 
+import io.reactivex.Observable;
+
 public class HelloReactive {
 	public static void main(String args[]) { 
-		System.out.println("Hello Reactive!");		
+		new HelloReactive().run();
+	}
+	
+	public void run() {
+		Observable.just("Hello", "Reactive", "Java!!")
+		.subscribe(System.out::println);
 	}
 }
