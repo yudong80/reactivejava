@@ -8,6 +8,11 @@ public class SingleExample {
 		Single<String> source = Observable.just("Hello Single").single("default item");
 		source.subscribe(System.out::println);
 	}
+
+	public void justToSingleError() {
+		Single<String> source = Observable.just("Hello Single", "Error").single("default item");
+		source.subscribe(System.out::println);
+	}	
 	
 	public void fromArrayToSingle() { 
 		String[] colors = {"Red", "Blue", "Gold"};
@@ -30,6 +35,7 @@ public class SingleExample {
 	public static void main(String[] args) { 
 		SingleExample demo = new SingleExample();
 		demo.justToSingle();
+		//demo.justToSingleError();  //error case 
 		demo.fromArrayToSingle();
 		demo.emptyToSingle();
 		demo.neverToSingle();

@@ -15,7 +15,7 @@ public class ObservableFromPublisher {
 		source.subscribe(System.out::println);		
 	}
 	
-	public void noLambda() { 
+	public void withoutLambda() { 
 		Publisher<String> publisher = new Publisher<String>() {
 			@Override
 			public void subscribe(Subscriber<? super String> s) {
@@ -30,6 +30,6 @@ public class ObservableFromPublisher {
 	public static void main(String[] args) { 
 		ObservableFromPublisher demo = new ObservableFromPublisher();
 		demo.run();
-		demo.noLambda();
+		demo.withoutLambda();
 	}
 }

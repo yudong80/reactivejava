@@ -6,21 +6,25 @@ import io.reactivex.Observable;
 import io.reactivex.subjects.AsyncSubject;
 
 public class AsyncSubjectExample {
-	public void create() { 
-		AsyncSubject<Integer> subject = AsyncSubject.create();
-		subject.onNext(10);
-		subject.onNext(11);
-		subject.onNext(12);
+	public void basicUsage() { 
+		AsyncSubject<String> subject = AsyncSubject.create();
+		subject.subscribe(str -> System.out.println("#1 => "+ str));
+		subject.onNext("Red");
+		subject.onNext("Green");
+		subject.subscribe(str -> System.out.println("#2 => "+ str));
+		subject.onNext("Blue");
 		subject.onComplete();
-		subject.subscribe(System.out::println);
+		CommonUtils.printDash();
 	}
 	
-	public void fromArray() { 
-		AsyncSubject<Float> subject = AsyncSubject.create();
+	public void subscribeObservable() { 
 		Float[] temperature = { 10.1f, 13.4f, 12.5f  };
 		Observable<Float> source = Observable.fromArray(temperature);
+		
+		AsyncSubject<Float> subject = AsyncSubject.create();
 		source.subscribe(subject);
 		subject.subscribe(System.out::println);	
+		CommonUtils.printDash();		
 	}
 	
 	public void multiSubscribed() { 
@@ -30,15 +34,14 @@ public class AsyncSubjectExample {
 		subject.subscribe(str -> System.out.println("#1 => " + str));
 		subject.onNext(12);
 		subject.onComplete();
-		subject.subscribe(str -> System.out.println("#2 => " + str));		
+		subject.subscribe(str -> System.out.println("#2 => " + str));
+		CommonUtils.printDash();		
 	}
 	
 	public static void main(String[] args) { 
 		AsyncSubjectExample demo = new AsyncSubjectExample();
-		demo.create(); 
-		CommonUtils.dash();
-		demo.fromArray();
-		CommonUtils.dash();
+		demo.basicUsage(); 
+		demo.subscribeObservable();
 		demo.multiSubscribed();
 	}
 }

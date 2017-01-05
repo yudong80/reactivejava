@@ -14,7 +14,7 @@ public class ObservableFromCallable {
 		source.subscribe(System.out::println);
 	}
 	
-	public void noLambda() { 
+	public void withoutLambda() { 
 		Callable<String> callable = new Callable<String>() {
 			@Override
 			public String call() throws Exception {
@@ -29,6 +29,6 @@ public class ObservableFromCallable {
 	public static void main(String[] args) { 
 		ObservableFromCallable demo = new ObservableFromCallable();
 		demo.run();		
-		demo.noLambda();
+//		demo.withoutLambda();
 	}
 }

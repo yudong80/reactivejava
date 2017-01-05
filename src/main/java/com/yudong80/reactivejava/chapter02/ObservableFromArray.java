@@ -17,6 +17,11 @@ public class ObservableFromArray {
 		source.subscribe(System.out::println);
 	}
 	
+	public void intArrayWrong() { 
+		int[] intArray = { 400, 500, 600};
+		Observable.fromArray(intArray).subscribe(System.out::println);		
+	}
+	
 	private static Integer[] toIntegerArray(int[] intArray) { 
 		return IntStream.of(intArray).boxed().toArray(Integer[]::new);
 	}
@@ -25,5 +30,6 @@ public class ObservableFromArray {
 		ObservableFromArray demo = new ObservableFromArray();
 		demo.integerArray();
 		demo.intArray();
+		demo.intArrayWrong();
 	}	
 }

@@ -1,10 +1,10 @@
 package com.yudong80.reactivejava.chapter02;
 
-import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.subjects.PublishSubject;
 
-public class BehaviorSubjectExample {
-	public void basic() { 
-		BehaviorSubject<String> subject = BehaviorSubject.createDefault("Pupple");
+public class PublishSubjectExample {
+	public void basicUsage() { 
+		PublishSubject<String> subject = PublishSubject.create();
 		subject.subscribe(str -> System.out.println("#1 => " + str));
 		subject.onNext("Red");
 		subject.onNext("Green");
@@ -14,7 +14,7 @@ public class BehaviorSubjectExample {
 	}
 	
 	public static void main(String[] args) { 
-		BehaviorSubjectExample demo = new BehaviorSubjectExample();
-		demo.basic();
+		PublishSubjectExample demo = new PublishSubjectExample();
+		demo.basicUsage();
 	}
 }

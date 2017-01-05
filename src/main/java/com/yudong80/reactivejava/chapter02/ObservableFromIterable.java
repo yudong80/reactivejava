@@ -29,18 +29,31 @@ public class ObservableFromIterable {
 	}
 	
 	public void forBlockingQueue() { 
-		BlockingQueue<String> queue = new ArrayBlockingQueue<>(100);
-		queue.add("ORD-1");
-		queue.add("ORD-2");
-		queue.add("ORD-3");
-		Observable<String> source = Observable.fromIterable(queue);
-		source.subscribe(System.out::println);				
+		BlockingQueue<Order> orderQueue = new ArrayBlockingQueue<>(100);
+		orderQueue.add(new Order("ORD-1"));
+		orderQueue.add(new Order("ORD-2"));
+		orderQueue.add(new Order("ORD-3"));
+		Observable<Order> source = Observable.fromIterable(orderQueue);
+		source.subscribe(order -> System.out.println(order.getId()));				
 	}
 	
 	public static void main(String[] args){ 
 		ObservableFromIterable demo = new ObservableFromIterable();
-		demo.forList();
-		demo.forSet();
+//		demo.forList();
+//		demo.forSet();
 		demo.forBlockingQueue();
 	}	
 }
+
+class Order { 
+	private String mId;
+	
+	public Order(String id) { 
+		mId = id;
+	}
+	
+	public String getId() { 
+		return mId;
+	}		
+}
+

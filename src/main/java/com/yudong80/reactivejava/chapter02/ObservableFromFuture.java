@@ -9,30 +9,32 @@ import io.reactivex.Observable;
 public class ObservableFromFuture {
 	public void run() { 
 		Future<String> future = Executors.newSingleThreadExecutor()
-				.submit(getCallable());
+				.submit(() -> {
+					Thread.sleep(1000);
+					return "Hello Future";
+				});
 		Observable<String> source = Observable.fromFuture(future);
 		source.subscribe(System.out::println);
 	}
 	
-	private Callable<String> getCallable() { 
-		return () -> {
-			Thread.sleep(1000);
-			return "Hello Future";
-		};		
-	}
-	
-	private Callable<String> getCallableNoLambda() {
-		return new Callable<String>() {
+	public void withoutLambda() { 
+		Callable<String> callable = new Callable<String>() {
 			@Override
 			public String call() throws Exception {
 				Thread.sleep(1000);
 				return "Hello Future(No Lambda)";
 			}			
-		};		
-	}	
+		};
+		
+		Future<String> future = Executors.newSingleThreadExecutor()
+				.submit(callable);
+		Observable<String> source = Observable.fromFuture(future);
+		source.subscribe(System.out::println);		
+	}
 	
 	public static void main(String[] args) { 
 		ObservableFromFuture demo = new ObservableFromFuture();
-		demo.run();
+		//demo.run();
+		demo.withoutLambda();
 	}
 }
