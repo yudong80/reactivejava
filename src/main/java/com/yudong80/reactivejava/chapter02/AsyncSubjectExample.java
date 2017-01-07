@@ -14,7 +14,7 @@ public class AsyncSubjectExample {
 		subject.subscribe(str -> System.out.println("#2 => "+ str));
 		subject.onNext("Blue");
 		subject.onComplete();
-		CommonUtils.printDash();
+		CommonUtils.exampleComplete();
 	}
 	
 	public void subscribeObservable() { 
@@ -24,7 +24,7 @@ public class AsyncSubjectExample {
 		AsyncSubject<Float> subject = AsyncSubject.create();
 		source.subscribe(subject);
 		subject.subscribe(System.out::println);	
-		CommonUtils.printDash();		
+		CommonUtils.exampleComplete();		
 	}
 	
 	public void multiSubscribed() { 
@@ -35,7 +35,7 @@ public class AsyncSubjectExample {
 		subject.onNext(12);
 		subject.onComplete();
 		subject.subscribe(str -> System.out.println("#2 => " + str));
-		CommonUtils.printDash();		
+		CommonUtils.exampleComplete();		
 	}
 	
 	public static void main(String[] args) { 
