@@ -38,11 +38,15 @@ public class MapExample extends ThreeSubscribers {
 		
 		String[] balls = {"RED", "YELLOW", "GREEN", "BLUE"}; 
 		Observable<Integer> source = Observable.fromArray(balls)
-				.map(ballToIndex);
-		source.subscribe(System.out::println); //¿Ö? firstSubscriber¸¦ ¾µ ¼ö ¾øÀ»±î¿ä? 
+				.map(ballToIndex);   //ëª…ì‹œì ì¸ í˜• ë³€í™˜ì—†ì´ ë°”ë¡œ ì‚¬ìš©ê°€ëŠ¥ 
+		source.subscribe(System.out::println);  
 		CommonUtils.exampleComplete();		
 	}	
 	
+	public String getDiamond(String ball) { 
+		return ball + "<>";
+	}
+		
 	public static void main(String[] args) { 
 		MapExample demo = new MapExample();
 		demo.basic();
