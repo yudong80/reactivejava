@@ -8,13 +8,14 @@ import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
 public class Gugudan {
-	public void retro() { 
+	public void oldSchool() { 
 		Scanner in = new Scanner(System.in);
 		System.out.println("Gugudan Input:");
 		int dan = Integer.parseInt(in.nextLine());
 		for (int row=1; row<= 9; ++row) { 
 			System.out.println(dan + " * " + row + " = " + dan * row);
 		}
+		in.close();
 	}
 
 	public void reactiveV1() { 
@@ -23,6 +24,7 @@ public class Gugudan {
 		int dan = Integer.parseInt(in.nextLine());				
 		Observable<Integer> source = Observable.range(1, 9);
 		source.subscribe(row -> System.out.println(dan + " * " + row + " = " + dan * row)); 
+		in.close();
 	}					
 	
 	public void reactiveV2() { 
@@ -34,7 +36,8 @@ public class Gugudan {
 			Observable.range(1,9)
 			   		  .map(row -> num + " * " + row + " = " + dan*row);			
 		Observable<String> source = Observable.just(dan).flatMap(gugudan);
-		source.subscribe(System.out::println); 
+		source.subscribe(System.out::println);
+		in.close();
 	}					
 
 	public void reactiveV3() { 
@@ -43,13 +46,13 @@ public class Gugudan {
 		int dan = Integer.parseInt(in.nextLine());				
 			
 		Observable<String> source = Observable.just(dan)
-				.flatMap(num -> 
-					Observable.range(1,9)
+				.flatMap(num -> Observable.range(1,9)
 		   		  			  .map(row -> num + " * " + row + " = " + dan*row));
-		source.subscribe(System.out::println); 
+		source.subscribe(System.out::println);
+		in.close();
 	}					
 		
-	public void reactiveV44() { 
+	public void usingFlatMapWithResultSelector() { 
 		Scanner in = new Scanner(System.in);
 		System.out.println("Gugudan Input:");
 		int dan = Integer.parseInt(in.nextLine());		
@@ -57,6 +60,7 @@ public class Gugudan {
 				.flatMap(gugu -> Observable.range(1,9),
 						(gugu, i) -> gugu + " * " + i + " = " + gugu*i);
 		source.subscribe(System.out::println);
+		in.close();
 	}					
 					
 	public static void main(String[] args) { 
