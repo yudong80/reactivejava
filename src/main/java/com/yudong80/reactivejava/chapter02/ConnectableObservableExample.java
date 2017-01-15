@@ -18,7 +18,7 @@ public class ConnectableObservableExample extends ThreeSubscribers{
 					if (idx < balls.length)
 						return balls[idx];
 					else
-						return "..."; //FIXME 
+						return "..."; //FIXME Long.intValue() ì“°ë©´ ë¨  
 				});
 		ConnectableObservable<String> conSource = source.publish();
 		Disposable sub1 = conSource.subscribe(firstSubscriber);
@@ -27,7 +27,7 @@ public class ConnectableObservableExample extends ThreeSubscribers{
 		
 		Disposable sub3 = null;
 		try { 
-			Thread.sleep(250); //½ÇÇàÈ¯°æ¿¡ µû¶ó Á¶Á¤ ÇÊ¿ä 
+			Thread.sleep(250); //ï¿½ï¿½ï¿½ï¿½È¯ï¿½æ¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ 
 			sub3 = conSource.subscribe(thirdSubscriber);
 			Thread.sleep(100);
 		} catch (InterruptedException e) { 
