@@ -1,42 +1,57 @@
 package com.yudong80.reactivejava.chapter04;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.Pair;
+import java.util.concurrent.TimeUnit;
 
 import com.yudong80.reactivejava.common.CommonUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
+import io.reactivex.functions.Function;
 
 public class ConcatMapExample {
 	public void usingConcatMap() { 
-		List<Pair<String,Integer>> balls = new ArrayList<>();
-		balls.add(Pair.of("RED", 300));
-		balls.add(Pair.of("GREEN", 100));
-		balls.add(Pair.of("BLUE", 100));
+		Function<String, Observable<String>> ballToDoubleDiamonds = 
+				ball -> Observable.zip(
+					Observable.just(ball+ "<>", ball+ "<>"),
+					Observable.interval(100L, TimeUnit.MILLISECONDS),
+					(value,i) -> value					
+				);
+	
+		Observable<String> source = ballsWithDelay()
+				.concatMap(ballToDoubleDiamonds);
+//				.flatMap(ballToDoubleDiamonds);  //for interleaving
+//				.switchMap(ballToDoubleDiamonds);
 		
-		//Observable<String> ballsWithDelay = 
-		
-		try { 
-			Thread.sleep(1000);
-		} catch (InterruptedException e) { 
-			e.printStackTrace();
-		}
-		
+		long start = System.currentTimeMillis();
+		source.subscribe(str -> { 
+			long now = System.currentTimeMillis();
+			System.out.println((now - start) + " | " + str);
+		});
+		CommonUtils.sleep(1000);		
 		CommonUtils.exampleComplete();
 	}
 	
-	public static Observable<String> ballsWithDelay(Pair<String, Integer> balls) { 
+	public static Observable<String> ballsWithDelay() { 
 		return Observable.create((ObservableEmitter<String> emitter) -> { 
-	    	emitter.onNext("1000");
+	    	emitter.onNext("RED");
+	    	Thread.sleep(300);
+	    	emitter.onNext("GREEN");
+	    	Thread.sleep(50);
+	    	emitter.onNext("BLUE");
 	    	emitter.onComplete();
 	    }); 
+	}
+	
+	public void bb() { 
+		//Observable.range(1, 2).map(idx -> "XX" + idx).subscribe(System.out::println);
+		Observable<String> source = Observable.range(1, 2).map(idx -> "XX" + idx);
+		
+		//.subscribe(System.out::println);
 	}
 	
 	public static void main(String[] args) { 
 		ConcatMapExample demo = new ConcatMapExample();
 		demo.usingConcatMap();
+//		demo.bb();
 	}
 }
