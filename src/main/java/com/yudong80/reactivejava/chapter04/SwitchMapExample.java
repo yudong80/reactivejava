@@ -8,8 +8,8 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.functions.Function;
 
-public class ConcatMapExample {
-	public void usingConcatMap() { 
+public class SwitchMapExample {
+	public void usingSwitchMap() { 
 		Function<String, Observable<String>> ballToDoubleDiamonds = 
 				ball -> Observable.zip(
 					Observable.just(ball+ "<>", ball+ "<>"),
@@ -18,9 +18,7 @@ public class ConcatMapExample {
 				);
 	
 		Observable<String> source = ballsWithDelay()
-//				.concatMap(ballToDoubleDiamonds);
-				.flatMap(ballToDoubleDiamonds);  //for interleaving
-//				.switchMap(ballToDoubleDiamonds);
+				.switchMap(ballToDoubleDiamonds);
 		
 		long start = System.currentTimeMillis();
 		source.subscribe(str -> { 
@@ -36,14 +34,14 @@ public class ConcatMapExample {
 	    	emitter.onNext("RED");
 	    	Thread.sleep(300);
 	    	emitter.onNext("GREEN");
-	    	Thread.sleep(50);
+	    	Thread.sleep(150);
 	    	emitter.onNext("BLUE");
 	    	emitter.onComplete();
 	    }); 
 	}
 	
 	public static void main(String[] args) { 
-		ConcatMapExample demo = new ConcatMapExample();
-		demo.usingConcatMap();
+		SwitchMapExample demo = new SwitchMapExample();
+		demo.usingSwitchMap();
 	}
 }
