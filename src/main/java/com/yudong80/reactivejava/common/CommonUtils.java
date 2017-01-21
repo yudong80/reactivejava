@@ -28,4 +28,9 @@ public class CommonUtils {
 		if (obj.endsWith("<>")) return "DIAMOND";
 		return "BALL";
 	}
+	
+	public static void logWithThread(Object obj) { 
+		String threadName = Thread.currentThread().getName(); 
+		System.out.println(threadName + "| value = " + obj);	
+	}
 }
