@@ -92,7 +92,7 @@ public class SchedulersBasic {
 		CommonUtils.exampleStart("usingExecutorScheduler");
 		Observable<String> source = Observable.just("ONE", "TWO", "THREE");
 		final int THREAD_NUM = 10;
-		Executor executor = Executors.newFixedThreadPool(THREAD_NUM);
+		Executor executor = Executors.newSingleThreadExecutor()//.newFixedThreadPool(THREAD_NUM);
 		
 		Disposable sub1 = source.subscribeOn(Schedulers.from(executor))
 				.subscribe(CommonUtils::logWithThread);
