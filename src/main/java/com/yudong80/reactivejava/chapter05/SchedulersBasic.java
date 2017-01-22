@@ -1,14 +1,14 @@
 package com.yudong80.reactivejava.chapter05;
 
 import java.io.File;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import com.yudong80.reactivejava.common.CommonUtils;
 
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class SchedulersBasic {
@@ -75,6 +75,35 @@ public class SchedulersBasic {
 		CommonUtils.exampleComplete();
 	}
 	
+	public void usingTrampolineScheduler() { 
+		Observable<String> source = Observable.just("ONE", "TWO", "THREE");
+		
+		Disposable sub1 = source.subscribeOn(Schedulers.trampoline())
+				.subscribe(CommonUtils::logWithThread);
+		Disposable sub2 = source.subscribeOn(Schedulers.trampoline())
+				.subscribe(CommonUtils::logWithThread);
+		CommonUtils.sleep(500);		
+		sub1.dispose();
+		sub2.dispose();		
+		CommonUtils.exampleComplete();
+	}
+	
+	public void usingExecutorScheduler() { 
+		CommonUtils.exampleStart("usingExecutorScheduler");
+		Observable<String> source = Observable.just("ONE", "TWO", "THREE");
+		final int THREAD_NUM = 10;
+		Executor executor = Executors.newFixedThreadPool(THREAD_NUM);
+		
+		Disposable sub1 = source.subscribeOn(Schedulers.from(executor))
+				.subscribe(CommonUtils::logWithThread);
+		Disposable sub2 = source.subscribeOn(Schedulers.from(executor))
+				.subscribe(CommonUtils::logWithThread);
+		CommonUtils.sleep(500);		
+		sub1.dispose();
+		sub2.dispose();				
+		CommonUtils.exampleComplete();
+	}
+	
 	public static void main(String[] args) { 
 		SchedulersBasic demo = new SchedulersBasic();
 //		demo.noScheduler();
@@ -82,6 +111,8 @@ public class SchedulersBasic {
 //		demo.multiSingleScheduler();
 //		demo.usingInterval();
 //		demo.usingIOScheduler();
-		demo.usingNewThreadScheduler();
+//		demo.usingNewThreadScheduler();
+//		demo.usingTrampolineScheduler();
+		demo.usingExecutorScheduler();
 	}
 }

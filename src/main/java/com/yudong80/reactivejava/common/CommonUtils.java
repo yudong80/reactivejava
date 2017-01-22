@@ -1,6 +1,13 @@
 package com.yudong80.reactivejava.common;
 
 public class CommonUtils {
+	public static long startTime;
+	
+	public static void exampleStart(String title) {
+		startTime = System.currentTimeMillis();
+		System.out.println("Example: " + title);
+	}
+	
 	public static void exampleComplete() { 
 		System.out.println("-----------------------");
 	}
