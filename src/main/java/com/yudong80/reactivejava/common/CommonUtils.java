@@ -38,6 +38,9 @@ public class CommonUtils {
 	
 	public static void logWithThread(Object obj) { 
 		String threadName = Thread.currentThread().getName(); 
+		if (threadName.length() > 15) {
+			threadName = threadName.substring(0, 15) + "...";
+		}		
 		System.out.println(threadName + "| value = " + obj);	
 	}
 }
