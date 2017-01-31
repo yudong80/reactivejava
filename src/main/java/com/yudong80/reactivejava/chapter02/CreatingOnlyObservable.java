@@ -3,6 +3,9 @@ package com.yudong80.reactivejava.chapter02;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 
+/**
+ * @deprecated see ObservableCreateExample
+ */
 public class CreatingOnlyObservable {
 	public void run() { 
 		Observable<Integer> source = 
