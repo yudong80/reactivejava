@@ -1,11 +1,18 @@
 package com.yudong80.reactivejava.common;
 
+import java.io.IOException;
+import java.net.InetAddress;
+
 public class CommonUtils {
 	public static long startTime;
 	
 	public static void exampleStart(String title) {
-		startTime = System.currentTimeMillis();
+		exampleStart();		
 		System.out.println("Example: " + title);
+	}
+	
+	public static void exampleStart() {
+		startTime = System.currentTimeMillis();
 	}
 	
 	public static void exampleComplete() { 
@@ -36,7 +43,19 @@ public class CommonUtils {
 		return "BALL";
 	}
 	
+	/**
+	 * @deprecated
+	 */
 	public static void logWithThread(Object obj) { 
 		System.out.println(Log.getThreadName() + "| value = " + obj);	
+	}
+	
+	public static boolean isNetworkAvailable() { 
+		try {
+			return InetAddress.getByName("www.google.com").isReachable(1000);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
