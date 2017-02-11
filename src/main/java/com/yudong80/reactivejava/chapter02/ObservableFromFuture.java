@@ -4,10 +4,12 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import com.yudong80.reactivejava.common.CommonUtils;
+
 import io.reactivex.Observable;
 
 public class ObservableFromFuture {
-	public void run() { 
+	public void basic() { 
 		Future<String> future = Executors.newSingleThreadExecutor()
 				.submit(() -> {
 					Thread.sleep(1000);
@@ -15,6 +17,7 @@ public class ObservableFromFuture {
 				});
 		Observable<String> source = Observable.fromFuture(future);
 		source.subscribe(System.out::println);
+		CommonUtils.exampleComplete();
 	}
 	
 	public void withoutLambda() { 

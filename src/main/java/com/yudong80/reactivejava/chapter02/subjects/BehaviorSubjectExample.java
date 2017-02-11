@@ -1,4 +1,4 @@
-package com.yudong80.reactivejava.chapter02;
+package com.yudong80.reactivejava.chapter02.subjects;
 
 import io.reactivex.subjects.BehaviorSubject;
 
