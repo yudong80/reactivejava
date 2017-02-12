@@ -6,12 +6,12 @@ import io.reactivex.Observable;
 import io.reactivex.subjects.AsyncSubject;
 
 public class AsyncSubjectExample {
-	public void basicUsage() { 
+	public void basic() { 
 		AsyncSubject<String> subject = AsyncSubject.create();
-		subject.subscribe(str -> System.out.println("#1 => "+ str));
+		subject.subscribe(str -> System.out.println("Observer #1 => "+ str));
 		subject.onNext("Red");
 		subject.onNext("Green");
-		subject.subscribe(str -> System.out.println("#2 => "+ str));
+		subject.subscribe(str -> System.out.println("Observer #2 => "+ str));
 		subject.onNext("Blue");
 		subject.onComplete();
 		CommonUtils.exampleComplete();
@@ -40,7 +40,7 @@ public class AsyncSubjectExample {
 	
 	public static void main(String[] args) { 
 		AsyncSubjectExample demo = new AsyncSubjectExample();
-		demo.basicUsage(); 
+		demo.basic(); 
 		demo.subscribeObservable();
 		demo.multiSubscribed();
 	}

@@ -5,12 +5,7 @@ import java.net.InetAddress;
 
 public class CommonUtils {
 	public static long startTime;
-	
-	public static void exampleStart(String title) {
-		exampleStart();		
-		System.out.println("Example: " + title);
-	}
-	
+
 	public static void exampleStart() {
 		startTime = System.currentTimeMillis();
 	}
@@ -42,14 +37,7 @@ public class CommonUtils {
 		if (obj.endsWith("<>")) return "DIAMOND";
 		return "BALL";
 	}
-	
-	/**
-	 * @deprecated
-	 */
-	public static void logWithThread(Object obj) { 
-		System.out.println(Log.getThreadName() + "| value = " + obj);	
-	}
-	
+		
 	public static boolean isNetworkAvailable() { 
 		try {
 			return InetAddress.getByName("www.google.com").isReachable(1000);

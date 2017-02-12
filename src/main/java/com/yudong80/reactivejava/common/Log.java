@@ -32,8 +32,8 @@ public class Log {
 	
 	public static String getThreadName() { 
 		String threadName = Thread.currentThread().getName(); 
-		if (threadName.length() > 15) {
-			threadName = threadName.substring(0, 15) + "...";
+		if (threadName.length() > 30) {
+			threadName = threadName.substring(0, 30) + "...";
 		}		
 		return threadName;
 	}

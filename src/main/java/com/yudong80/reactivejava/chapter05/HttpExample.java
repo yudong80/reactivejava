@@ -3,6 +3,7 @@ package com.yudong80.reactivejava.chapter05;
 import java.io.IOException;
 
 import com.yudong80.reactivejava.common.CommonUtils;
+import com.yudong80.reactivejava.common.Log;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -30,7 +31,7 @@ public class HttpExample {
 
 			@Override
 			public void onResponse(Call call, Response response) throws IOException {
-				CommonUtils.logWithThread(response.body().string());
+				Log.i(response.body().string());
 			}			
 		});
 		CommonUtils.exampleComplete();
@@ -44,7 +45,7 @@ public class HttpExample {
 
 		@Override
 		public void onResponse(Call call, Response response) throws IOException {
-			CommonUtils.logWithThread(response.body().string());
+			Log.i(response.body().string());
 		} 
 	};
 	
@@ -60,7 +61,7 @@ public class HttpExample {
 
 			@Override
 			public void onResponse(Call call, Response response) throws IOException {
-				CommonUtils.logWithThread(response.body().string());
+				Log.i(response.body().string());
 				
 				//add callback again
 				Request request = new Request.Builder()

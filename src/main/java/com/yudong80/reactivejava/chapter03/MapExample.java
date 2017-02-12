@@ -15,7 +15,7 @@ public class MapExample extends ThreeSubscribers {
 		CommonUtils.exampleComplete();
 	}
 	
-	public void mapWithFunction() { 
+	public void mapFunction() { 
 		Function<String, String> ballToDiamond = ball -> ball + "<>";
 		
 		String[] balls = {"RED", "YELLOW", "GREEN", "BLUE"};
@@ -50,7 +50,7 @@ public class MapExample extends ThreeSubscribers {
 	public static void main(String[] args) { 
 		MapExample demo = new MapExample();
 		demo.basic();
-		demo.mapWithFunction();
+		demo.mapFunction();
 		demo.mapTypeConversion();
 	}
 }

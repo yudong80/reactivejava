@@ -1,5 +1,7 @@
 package com.yudong80.reactivejava.chapter02.subjects;
 
+import com.yudong80.reactivejava.common.CommonUtils;
+
 import io.reactivex.subjects.BehaviorSubject;
 
 public class BehaviorSubjectExample {
@@ -11,6 +13,7 @@ public class BehaviorSubjectExample {
 		subject.subscribe(str -> System.out.println("#2 => " + str));
 		subject.onNext("Blue");
 		subject.onComplete();
+		CommonUtils.exampleComplete();
 	}
 	
 	public static void main(String[] args) { 
