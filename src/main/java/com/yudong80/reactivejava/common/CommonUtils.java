@@ -28,6 +28,9 @@ public class CommonUtils {
 		return Character.toString(ALPHABET.charAt((int) x % ALPHABET.length()));
 	}
 	
+	/**
+	 * @deprecated 분리 필요 
+	 */
 	public static String getShape(String obj) {
 		if (obj == null || obj.equals("")) return "NO-SHAPE";		
 		if (obj.endsWith("-H")) return "HEXAGON";
@@ -35,6 +38,7 @@ public class CommonUtils {
 		if (obj.endsWith("-R")) return "RECTANGLE";
 		if (obj.endsWith("-T")) return "TRIANGLE";
 		if (obj.endsWith("<>")) return "DIAMOND";
+		if (obj.endsWith("-P")) return "PETAGON";
 		return "BALL";
 	}
 		
