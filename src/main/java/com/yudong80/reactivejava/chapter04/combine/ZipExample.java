@@ -1,4 +1,4 @@
-package com.yudong80.reactivejava.chapter04;
+package com.yudong80.reactivejava.chapter04.combine;
 
 import java.util.concurrent.TimeUnit;
 

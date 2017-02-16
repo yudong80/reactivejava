@@ -3,45 +3,32 @@ package com.yudong80.reactivejava.chapter04.transform;
 import java.util.concurrent.TimeUnit;
 
 import com.yudong80.reactivejava.common.CommonUtils;
+import com.yudong80.reactivejava.common.Log;
+import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.functions.Function;
 
-public class SwitchMapExample {
-	public void usingSwitchMap() { 
-		Function<String, Observable<String>> ballToDoubleDiamonds = 
-				ball -> Observable.zip(
-					Observable.just(ball+ "<>", ball+ "<>"),
-					Observable.interval(100L, TimeUnit.MILLISECONDS),
-					(value,i) -> value					
-				);
-	
-		Observable<String> source = ballsWithDelay()
-				.switchMap(ballToDoubleDiamonds);
+public class SwitchMapExample implements MarbleDiagram {
+	public void marbleDiagram() { 
+		CommonUtils.exampleStart(); //시간을 측정하기 위해 호출
 		
-		long start = System.currentTimeMillis();
-		source.subscribe(str -> { 
-			long now = System.currentTimeMillis();
-			System.out.println((now - start) + " | " + str);
-		});
-		CommonUtils.sleep(1000);		
+		String[] balls = {"RED", "GREEN", "BLUE"};
+		Observable<String> source = Observable.interval(100L, TimeUnit.MILLISECONDS)
+				.map(Long::intValue)
+				.map(idx -> balls[idx])
+				.take(3)
+				.doOnNext(Log::dt)  //중간결과 확인용 
+				.switchMap(
+					ball -> Observable.interval(200L, TimeUnit.MILLISECONDS)
+									.map(noValue -> ball + "<>")
+									.take(2));
+		source.subscribe(Log::it);
+		CommonUtils.sleep(2000);
 		CommonUtils.exampleComplete();
-	}
-	
-	public static Observable<String> ballsWithDelay() { 
-		return Observable.create((ObservableEmitter<String> emitter) -> { 
-	    	emitter.onNext("RED");
-	    	Thread.sleep(300);
-	    	emitter.onNext("GREEN");
-	    	Thread.sleep(150);
-	    	emitter.onNext("BLUE");
-	    	emitter.onComplete();
-	    }); 
 	}
 	
 	public static void main(String[] args) { 
 		SwitchMapExample demo = new SwitchMapExample();
-		demo.usingSwitchMap();
+		demo.marbleDiagram();
 	}
 }

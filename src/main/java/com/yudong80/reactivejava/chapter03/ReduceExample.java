@@ -6,13 +6,14 @@ import java.util.List;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.yudong80.reactivejava.common.CommonUtils;
+import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.functions.BiFunction;
 
-public class ReduceExample {
-	public void basic() { 
+public class ReduceExample implements MarbleDiagram {
+	public void marbleDiagram() { 
 		String[] balls = {"RED", "GREEN", "BLUE"};
 		Maybe<String> source = Observable.fromArray(balls)
 				.reduce((ball1, ball2) -> ball2 + "(" + ball1 + ")");
@@ -73,7 +74,7 @@ public class ReduceExample {
 	
 	public static void main(String[] args){ 
 		ReduceExample demo = new ReduceExample();
-		demo.basic();
+		demo.marbleDiagram();
 		demo.usingBiFunction();
 		demo.queryTvSales();
 	}
