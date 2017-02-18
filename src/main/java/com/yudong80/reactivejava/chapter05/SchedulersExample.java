@@ -12,7 +12,7 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class SchedulersBasic {
+public class SchedulersExample {
 	public void noScheduler() { 
 		Observable.just("ONE", "TWO", "THREE")
 		.subscribe(Log::i);
@@ -106,7 +106,7 @@ public class SchedulersBasic {
 	}
 	
 	public static void main(String[] args) { 
-		SchedulersBasic demo = new SchedulersBasic();
+		SchedulersExample demo = new SchedulersExample();
 //		demo.noScheduler();
 //		demo.singleScheduler();
 //		demo.multiSingleScheduler();
