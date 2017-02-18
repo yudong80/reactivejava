@@ -3,11 +3,13 @@ package com.yudong80.reactivejava.chapter04.combine;
 import java.util.concurrent.TimeUnit;
 
 import com.yudong80.reactivejava.common.CommonUtils;
+import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
 
-public class MergeExample {
-	public void basic() { 
+public class MergeExample implements MarbleDiagram{
+	@Override
+	public void marbleDiagram() { 
 		String[] balls1 = {"RED", "GREEN"};
 		String[] balls2 = {"YELLOW", "SKY", "PUPPLE"};
 		
@@ -28,6 +30,6 @@ public class MergeExample {
 	
 	public static void main(String[] args) { 
 		MergeExample demo = new MergeExample();
-		demo.basic();
+		demo.marbleDiagram();
 	}
 }

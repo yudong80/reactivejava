@@ -3,12 +3,14 @@ package com.yudong80.reactivejava.chapter04.combine;
 import java.util.concurrent.TimeUnit;
 
 import com.yudong80.reactivejava.common.CommonUtils;
+import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.BiFunction;
 
-public class CombineLatestExample {
-	public void basic() { 
+public class CombineLatestExample implements MarbleDiagram{
+	@Override
+	public void marbleDiagram() { 
 		Observable<String> source1 = Observable.interval(100L, TimeUnit.MILLISECONDS)
 				.map(CommonUtils::numberToAlphabet);
 		Observable<Long> source2 = Observable.interval(200L, TimeUnit.MILLISECONDS);
@@ -24,6 +26,6 @@ public class CombineLatestExample {
 	
 	public static void main(String[] args) {
 		CombineLatestExample demo = new CombineLatestExample();
-		demo.basic();
+		demo.marbleDiagram();
 	}
 }

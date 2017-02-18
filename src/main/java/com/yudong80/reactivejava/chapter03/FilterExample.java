@@ -1,13 +1,15 @@
 package com.yudong80.reactivejava.chapter03;
 
 import com.yudong80.reactivejava.common.CommonUtils;
+import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Predicate;
 
-public class FilterExample {
-	public void basic() { 
+public class FilterExample implements MarbleDiagram {
+	@Override
+	public void marbleDiagram() { 
 		String[] objs = {"RED CIRCLE", "YELLOW DIAMOND", "GREEN TRIANGLE", 
 				"SKY DIAMOND", "BLUE CIRCLE", "PUPPLE HEXAGON"};
 		Observable<String> source = Observable.fromArray(objs)
@@ -68,7 +70,7 @@ public class FilterExample {
 	
 	public static void main(String[] args) { 
 		FilterExample demo = new FilterExample();
-		demo.basic();
+		demo.marbleDiagram();
 		demo.usingPredicate();
 		demo.filterEvenNumber();
 		demo.showFilters();

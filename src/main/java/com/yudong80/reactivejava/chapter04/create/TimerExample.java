@@ -6,11 +6,12 @@ import java.util.concurrent.TimeUnit;
 
 import com.yudong80.reactivejava.common.CommonUtils;
 import com.yudong80.reactivejava.common.Log;
+import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
 
-public class TimerExample {
-	public void callSomeMethod() {
+public class TimerExample implements MarbleDiagram {
+	public void marbleDiagram() {
 		CommonUtils.exampleStart();
 		Observable<String> source = Observable.timer(500L, TimeUnit.MILLISECONDS)
 				.map(noValue -> { 
@@ -24,6 +25,6 @@ public class TimerExample {
 	
 	public static void main(String[] args) { 
 		TimerExample demo = new TimerExample(); 
-		demo.callSomeMethod();
+		demo.marbleDiagram();
 	}
 }

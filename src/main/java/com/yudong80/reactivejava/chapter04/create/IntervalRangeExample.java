@@ -4,11 +4,13 @@ import java.util.concurrent.TimeUnit;
 
 import com.yudong80.reactivejava.common.CommonUtils;
 import com.yudong80.reactivejava.common.Log;
+import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
 
-public class IntervalRangeExample {
-	public void basic() { 
+public class IntervalRangeExample implements MarbleDiagram{
+	@Override
+	public void marbleDiagram() { 
 		Observable<Long> source = Observable.intervalRange(1, 
 				5, 
 				100L ,
@@ -31,7 +33,7 @@ public class IntervalRangeExample {
 	
 	public static void main(String[] args) { 
 		IntervalRangeExample demo = new IntervalRangeExample();
-//		demo.basic();
+		demo.marbleDiagram();
 		demo.makeWithInterval();
 	}
 }

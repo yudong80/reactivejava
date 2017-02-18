@@ -1,13 +1,15 @@
 package com.yudong80.reactivejava.chapter03;
 
 import com.yudong80.reactivejava.common.CommonUtils;
+import com.yudong80.reactivejava.common.MarbleDiagram;
 import com.yudong80.reactivejava.common.ThreeSubscribers;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
-public class FlatMapExample extends ThreeSubscribers{
-	public void basic() { 
+public class FlatMapExample extends ThreeSubscribers implements MarbleDiagram{
+	@Override
+	public void marbleDiagram() { 
 		//함수를 별도로 정의하는 것이 가장 먼저 겪어야 할 관문임 
 		Function<String, Observable<String>> ballToDoubleDiamonds = 
 				ball -> Observable.just(ball + "<>", ball + "<>");
@@ -31,6 +33,6 @@ public class FlatMapExample extends ThreeSubscribers{
 	
 	public static void main(String[] args) { 
 		FlatMapExample demo = new FlatMapExample();
-		demo.basic();
+		demo.marbleDiagram();
 	}
 }

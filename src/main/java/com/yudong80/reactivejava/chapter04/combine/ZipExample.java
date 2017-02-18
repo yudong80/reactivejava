@@ -3,11 +3,13 @@ package com.yudong80.reactivejava.chapter04.combine;
 import java.util.concurrent.TimeUnit;
 
 import com.yudong80.reactivejava.common.CommonUtils;
+import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
 
-public class ZipExample {
-	public void simpleZip(){ 
+public class ZipExample implements MarbleDiagram{
+	@Override
+	public void marbleDiagram(){ 
 		Observable<Integer> source = Observable.zip(
 			Observable.just(100, 200, 300), 
 			Observable.just(1, 2, 3),
@@ -33,7 +35,7 @@ public class ZipExample {
 	
 	public static void main(String[] args) { 
 		ZipExample demo = new ZipExample();
-		demo.simpleZip();
+		demo.marbleDiagram();
 		demo.intervalZip();
 	}
 }

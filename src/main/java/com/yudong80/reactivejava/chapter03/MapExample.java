@@ -1,13 +1,15 @@
 package com.yudong80.reactivejava.chapter03;
 
 import com.yudong80.reactivejava.common.CommonUtils;
+import com.yudong80.reactivejava.common.MarbleDiagram;
 import com.yudong80.reactivejava.common.ThreeSubscribers;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
-public class MapExample extends ThreeSubscribers {
-	public void basic() { 
+public class MapExample extends ThreeSubscribers implements MarbleDiagram {
+	@Override
+	public void marbleDiagram() { 
 		String[] balls = {"RED", "YELLOW", "GREEN", "BLUE"}; 
 		Observable<String> source = Observable.fromArray(balls)
 				.map(ball -> ball + "<>");
@@ -49,7 +51,7 @@ public class MapExample extends ThreeSubscribers {
 		
 	public static void main(String[] args) { 
 		MapExample demo = new MapExample();
-		demo.basic();
+		demo.marbleDiagram();
 		demo.mapFunction();
 		demo.mapTypeConversion();
 	}

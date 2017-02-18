@@ -3,11 +3,13 @@ package com.yudong80.reactivejava.chapter04.combine;
 import java.util.concurrent.TimeUnit;
 
 import com.yudong80.reactivejava.common.CommonUtils;
+import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
 
-public class ConcatExample {
-	public void basic() { 
+public class ConcatExample implements MarbleDiagram{
+	@Override
+	public void marbleDiagram() { 
 		String[] balls1 = {"RED", "GREEN", "BLUE"};
 		String[] balls2 = {"YELLOW", "SKY", "PUPPLE"};
 		Observable<String> source1 = Observable.range(0, 3)
@@ -25,6 +27,6 @@ public class ConcatExample {
 	
 	public static void main(String[] args) { 
 		ConcatExample demo = new ConcatExample();
-		demo.basic();
+		demo.marbleDiagram();
 	}
 }

@@ -4,13 +4,15 @@ import java.util.concurrent.Callable;
 
 import com.yudong80.reactivejava.common.CommonUtils;
 import com.yudong80.reactivejava.common.Log;
+import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
 
-public class DeferExample {
+public class DeferExample implements MarbleDiagram{
 	private static int colorIdx = 0;
 	
-	public void basic() { 
+	@Override
+	public void marbleDiagram() { 
 		Callable<Observable<String>> supplier = () -> { 
 			String[] colors = {"RED", "GREEN", "BLUE", "YELLOW"};
 			colorIdx++; 
@@ -33,6 +35,6 @@ public class DeferExample {
 	
 	public static void main(String[] args) { 
 		DeferExample demo = new DeferExample();
-		demo.basic();
+		demo.marbleDiagram();
 	}
 }
