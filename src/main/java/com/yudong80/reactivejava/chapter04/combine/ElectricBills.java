@@ -79,19 +79,19 @@ public class ElectricBills {
 					return (int)(series1 + series2 + series3);
 				});
 		
-		Observable<Pair<Integer, Integer>> source = Observable.zip(
+		Observable<Pair<String, Integer>> source = Observable.zip(
 				basePrice, 
 				usagePrice,
-				Observable.range(0, data.length),
+				Observable.fromArray(data),
 				(v1, v2, i) -> Pair.of(i, v1+v2));
 		
 		//print the result 
-		source.map(val -> Pair.of(val.getKey(), 
+		source.map(val -> Pair.of(val.getLeft(), 
 					new DecimalFormat("#,###").format(val.getValue())))
 		.subscribe(val -> { 
 			StringBuilder sb = new StringBuilder();
-			sb.append("Usage: " + data[val.getKey()] + " kWh => ");
-			sb.append("Price: " + val.getValue() + "원");
+			sb.append("Usage: " + val.getLeft() + " kWh => ");
+			sb.append("Price: " + val.getRight() + "원");
 			Log.i(sb.toString());
 		});
 		CommonUtils.exampleComplete();

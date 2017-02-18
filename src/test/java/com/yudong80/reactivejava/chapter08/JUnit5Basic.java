@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 
 import com.yudong80.reactivejava.common.CommonUtils;
 import com.yudong80.reactivejava.common.Log;
+import com.yudong80.reactivejava.common.Shape;
 
 import io.reactivex.Observable;
 
@@ -31,7 +32,7 @@ public class JUnit5Basic {
 	void testGetShapeObservable() { 
 		String[] data = {"RED", "BLUE-R", "YELLOW-T"};
 		Observable<String> source = Observable.fromArray(data)
-				.map(CommonUtils::getShape);
+				.map(Shape::getShape);
 		
 		String[] expected = {"BALL", "RECTANGLE", "TRIANGLE"};
 		List<String> actual = new ArrayList<>();

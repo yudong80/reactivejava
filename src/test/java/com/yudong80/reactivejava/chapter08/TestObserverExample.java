@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 
-import com.yudong80.reactivejava.common.CommonUtils;
+import com.yudong80.reactivejava.common.Shape;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -18,7 +18,7 @@ public class TestObserverExample {
 	void assertResultGetShape() { 
 		String[] data = {"RED", "BLUE-R", "YELLOW-T"};
 		Observable<String> source = Observable.fromArray(data)
-				.map(CommonUtils::getShape);
+				.map(Shape::getShape);
 
 		String[] expected = {"BALL", "RECTANGLE", "TRIANGLE"};		
 		source.test()

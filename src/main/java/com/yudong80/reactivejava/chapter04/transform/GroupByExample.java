@@ -2,6 +2,7 @@ package com.yudong80.reactivejava.chapter04.transform;
 
 import com.yudong80.reactivejava.common.CommonUtils;
 import com.yudong80.reactivejava.common.MarbleDiagram;
+import com.yudong80.reactivejava.common.Shape;
 
 import io.reactivex.Observable;
 import io.reactivex.observables.GroupedObservable;
@@ -12,7 +13,7 @@ public class GroupByExample implements MarbleDiagram{
 		String[] objs = {"PUPPLE", "SKY", "YELLOW-T", "YELLOW", "PUPPLE-T", "SKY-T"};
 		Observable<GroupedObservable<String, String>> source = 
 				Observable.fromArray(objs)
-				.groupBy(CommonUtils::getShape);
+				.groupBy(Shape::getShape);
 		
 		source.subscribe(obj -> {
 			obj.subscribe(val -> 
@@ -25,7 +26,7 @@ public class GroupByExample implements MarbleDiagram{
 		String[] objs = {"PUPPLE", "SKY", "YELLOW-T", "YELLOW", "PUPPLE-T", "SKY-T"};
 		Observable<GroupedObservable<String, String>> source = 
 				Observable.fromArray(objs)
-				.groupBy(CommonUtils::getShape);
+				.groupBy(Shape::getShape);
 		
 		source.subscribe(obj -> {
 			obj.filter(val -> obj.getKey().equals("BALL"))
