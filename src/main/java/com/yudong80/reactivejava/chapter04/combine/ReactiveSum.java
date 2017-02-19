@@ -38,6 +38,7 @@ public class ReactiveSum {
 				emitter.onNext(line);
 				
 				if (line.indexOf("exit") >= 0) { 
+					in.close();
 					break;
 				}
 			}			

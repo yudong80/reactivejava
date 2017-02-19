@@ -3,25 +3,31 @@ package com.yudong80.reactivejava.chapter04.combine;
 import java.util.concurrent.TimeUnit;
 
 import com.yudong80.reactivejava.common.CommonUtils;
+import com.yudong80.reactivejava.common.Log;
 import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.Action;
 
 public class ConcatExample implements MarbleDiagram{
 	@Override
-	public void marbleDiagram() { 
-		String[] balls1 = {"RED", "GREEN", "BLUE"};
-		String[] balls2 = {"YELLOW", "SKY", "PUPPLE"};
-		Observable<String> source1 = Observable.range(0, 3)
-				.map(idx -> balls1[idx]);
+	public void marbleDiagram() {
+		Action onCompleteAction = () -> Log.d("onComplete()");
+		
+		String[] data1 = {"RED", "GREEN", "BLUE"};
+		String[] data2 = {"YELLOW", "SKY", "PUPPLE"};
+		Observable<String> source1 = Observable.fromArray(data1)
+				.doOnComplete(onCompleteAction);
 		Observable<String> source2 = Observable.interval(100L, TimeUnit.MILLISECONDS)
 				.map(Long::intValue)
-				.map(idx -> balls2[idx])
-				.take(balls2.length);
-		Observable<String> source = Observable.concat(source1, source2);
-		source.subscribe(System.out::println);
+				.map(idx -> data2[idx])
+				.take(data2.length)
+				.doOnComplete(onCompleteAction);
 		
-		CommonUtils.sleep(500);
+		Observable<String> source = Observable.concat(source1, source2)
+				.doOnComplete(onCompleteAction);
+		source.subscribe(Log::i);		
+		CommonUtils.sleep(1000);
 		CommonUtils.exampleComplete();
 	}
 	

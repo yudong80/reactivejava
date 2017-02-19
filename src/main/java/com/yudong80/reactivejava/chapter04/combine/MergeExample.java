@@ -3,6 +3,7 @@ package com.yudong80.reactivejava.chapter04.combine;
 import java.util.concurrent.TimeUnit;
 
 import com.yudong80.reactivejava.common.CommonUtils;
+import com.yudong80.reactivejava.common.Log;
 import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
@@ -10,21 +11,21 @@ import io.reactivex.Observable;
 public class MergeExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() { 
-		String[] balls1 = {"RED", "GREEN"};
-		String[] balls2 = {"YELLOW", "SKY", "PUPPLE"};
+		String[] data1 = {"RED", "GREEN"};
+		String[] data2 = {"YELLOW", "SKY", "PUPPLE"};
 		
 		Observable<String> source1 = Observable.interval(0L, 100L, TimeUnit.MILLISECONDS)
 				.map(Long::intValue)
-				.map(idx -> balls1[idx])
-				.take(balls1.length);
+				.map(idx -> data1[idx])
+				.take(data1.length);
 		Observable<String> source2 = Observable.interval(50L, TimeUnit.MILLISECONDS)
 				.map(Long::intValue)
-				.map(idx -> balls2[idx])
-				.take(balls2.length);
+				.map(idx -> data2[idx])
+				.take(data2.length);
+
 		Observable<String> source = Observable.merge(source1, source2);
-		source.subscribe(System.out::println);
-		
-		CommonUtils.sleep(500);
+		source.subscribe(Log::i);		
+		CommonUtils.sleep(1000);
 		CommonUtils.exampleComplete();
 	}
 	
