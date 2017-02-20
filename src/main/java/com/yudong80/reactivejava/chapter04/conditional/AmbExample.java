@@ -1,4 +1,4 @@
-package com.yudong80.reactivejava.chapter04.etc;
+package com.yudong80.reactivejava.chapter04.conditional;
 
 import java.util.Arrays;
 import java.util.List;
