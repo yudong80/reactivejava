@@ -11,6 +11,7 @@ dependencies {
 	compile 'com.squareup.retrofit2:converter-gson:2.0.2'
 	compile 'com.squareup.okhttp3:okhttp:3.2.0'
 	compile 'org.apache.commons:commons-lang3:3.1'
+	compile "com.github.akarnokd:rxjava2-extensions:0.15.2"
 	
 	testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.0-M3'
 	testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.0-M3'
