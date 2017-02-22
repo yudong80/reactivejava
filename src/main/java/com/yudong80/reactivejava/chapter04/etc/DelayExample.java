@@ -14,8 +14,8 @@ public class DelayExample implements MarbleDiagram{
 		CommonUtils.exampleStart();
 		
 		String[] data = {"RED", "ORANGE", "YELLOW", "GREEN", "SKY"};
-		Observable<String> source = Observable.fromArray(data);
-//				.delay(100L, TimeUnit.MILLISECONDS);
+		Observable<String> source = Observable.fromArray(data)
+				.delay(100L, TimeUnit.MILLISECONDS);
 		source.subscribe(Log::it);
 		CommonUtils.sleep(1000);
 		CommonUtils.exampleComplete();

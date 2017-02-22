@@ -1,42 +1,60 @@
 package com.yudong80.reactivejava.chapter04.etc;
 
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.yudong80.reactivejava.common.CommonUtils;
 import com.yudong80.reactivejava.common.Log;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.BiFunction;
 
-/**
- * @deprecated 실패, 다시 도전 필요 
- */
 public class DelayPing {
-	public void run() { 
+	private Boolean[] pingResult = { 
+		true, 
+		true,
+		true,
+		true,
+		false, 
+		true,
+		true
+	};
+	private int index = 0;
+	
+	public void run() {
 		CommonUtils.exampleStart();
-		Boolean[] pingResult = {true, true, true, false, false, true, true};
-		final int PING_INTERVAL = 1000;
+		Observable.interval(100L, TimeUnit.MILLISECONDS)
+//			.doOnNext(i -> Log.dt("i = " + i))
+			.map(i -> doPing())
+			.map(success -> Pair.of(success, success ? 200 : 0))
+			.scan((val1, val2) -> {
+				int nextDelay = nextDelay(
+						val2.getLeft(),        	//success
+						val1.getRight());		//prevDelay	
+				return Pair.of(val2.getLeft(), nextDelay);
+			})
+			.delay(pair -> { 
+				CommonUtils.sleep(pair.getRight());
+				return Observable.just(pair);
+			})
+			.subscribe();		
 		
-		//ping 간격 1초 , 성공하면 1초 늘어남, 실패하면 다시 1초부터 시도 , 3회 실패시 중단 
-		Observable<Boolean> source1 = Observable.fromArray(pingResult);		
-		Observable<Integer> itemDelay = Observable.fromArray(pingResult)
-				.map(val -> val ? 1 : 0)
-				.scan((prev, now) -> now != 0 ? prev + 1000 * now : 0);
-		
-		Observable<Boolean> source = itemDelay
-				.delay(millis -> { 
-					CommonUtils.sleep(PING_INTERVAL + millis);
-					return Observable.just(millis);
-				})
-				//컴파일 에러가 날때는 이렇게 직접 익명 객체를 넣어주자 
-				.zipWith(source1, new BiFunction<Integer, Boolean, Boolean>() {
-					@Override
-					public Boolean apply(Integer t1, Boolean t2) throws Exception {
-						return t2;
-					}					
-				});
-		
-		source.subscribe(ping -> { 
-			Log.it(ping ? "PING SUCCESS" : "PING FAILURE");
-		});
+		CommonUtils.sleep(2000);
+	}
+	
+	private int nextDelay(boolean success, int prevDelay) { 
+		return success ? 
+			   prevDelay + 100: 
+			   100;		
+	}
+	
+	private boolean doPing() { 
+		if (index >= pingResult.length) { 
+			index = 0;
+		}
+		boolean res = pingResult[index++]; 
+		Log.it("doPing() : " + res);
+		return res;
 	}
 	
 	public static void main(String[] args) { 
