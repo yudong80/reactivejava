@@ -1,4 +1,4 @@
-package com.yudong80.reactivejava.chapter04.etc;
+package com.yudong80.reactivejava.chapter04.conditional;
 
 import com.yudong80.reactivejava.common.Log;
 import com.yudong80.reactivejava.common.MarbleDiagram;

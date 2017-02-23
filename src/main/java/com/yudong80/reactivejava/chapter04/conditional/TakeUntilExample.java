@@ -3,26 +3,29 @@ package com.yudong80.reactivejava.chapter04.conditional;
 import java.util.concurrent.TimeUnit;
 
 import com.yudong80.reactivejava.common.CommonUtils;
+import com.yudong80.reactivejava.common.Log;
+import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
 
-public class TakeUntilExample {
-	public void basic() { 
-		String[] balls = {"RED", "YELLOW", "GREEN", "SKY", "BLUE", "PUPPLE"};
-		Observable<String> source = Observable.interval(0L, 50L, TimeUnit.MILLISECONDS)
-				.map(Long::intValue)
-				.map(idx -> balls[idx])
-				.take(balls.length);
-		Observable<Long> other = Observable.timer(200L, TimeUnit.MILLISECONDS);
-		source = source.takeUntil(other);
-		source.subscribe(System.out::println);
+public class TakeUntilExample implements MarbleDiagram{
+	@Override
+	public void marbleDiagram() {
+		String[] data = {"RED", "YELLOW", "GREEN", "SKY", "BLUE", "PUPPLE"};
 		
-		CommonUtils.sleep(500);
+		Observable<String> source = Observable.interval(100L, TimeUnit.MILLISECONDS)
+				.map(Long::intValue)
+				.map(idx -> data[idx])
+				.take(data.length) //shield 
+				.takeUntil(Observable.timer(500L, TimeUnit.MILLISECONDS));
+		
+		source.subscribe(Log::i);
+		CommonUtils.sleep(1000);
 		CommonUtils.exampleComplete();
 	}
 	
 	public static void main(String[] args) { 
 		TakeUntilExample demo = new TakeUntilExample();
-		demo.basic();
+		demo.marbleDiagram();
 	}
 }

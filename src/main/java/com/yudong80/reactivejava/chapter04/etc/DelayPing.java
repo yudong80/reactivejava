@@ -24,7 +24,6 @@ public class DelayPing {
 	public void run() {
 		CommonUtils.exampleStart();
 		Observable.interval(100L, TimeUnit.MILLISECONDS)
-//			.doOnNext(i -> Log.dt("i = " + i))
 			.map(i -> doPing())
 			.map(success -> Pair.of(success, success ? 200 : 0))
 			.scan((val1, val2) -> {
