@@ -11,7 +11,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class SingleHttp {
+public class HttpGetExample {
 	private final OkHttpClient client = new OkHttpClient();
 	
 	private static final String URL_README = 
@@ -36,7 +36,7 @@ public class SingleHttp {
 	}
 		
 	public static void main(String[] args) { 
-		SingleHttp demo = new SingleHttp();
+		HttpGetExample demo = new HttpGetExample();
 		demo.singleCallback();
 	}
 }

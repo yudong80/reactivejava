@@ -7,6 +7,10 @@ import java.util.Random;
 public class CommonUtils {
 	public static final String GITHUB_ROOT = "https://raw.githubusercontent.com/yudong80/reactivejava/master/";
 	
+	public static final String API_KEY = 
+			"e7681f2ac93cbdf1bc3952e30ab80533"; 
+//			"5712cae3137a8f6bcbebe4fb35dfb434";
+	
 	public static long startTime;
 
 	public static void exampleStart() {

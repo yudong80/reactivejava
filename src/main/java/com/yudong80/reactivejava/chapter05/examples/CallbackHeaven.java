@@ -7,9 +7,9 @@ import com.yudong80.reactivejava.common.OkHttpHelper;
 
 import io.reactivex.Observable;
 
-public class NestedHttp {
+public class CallbackHeaven {
 	private static final String URL_CALL = "https://api.github.com/zen";
-	private static final String URL_ON_SUCCESS = GITHUB_ROOT + "/samples/callback_hell";
+	private static final String URL_ON_SUCCESS = GITHUB_ROOT + "/samples/callback_heaven";
 	
 	public void run() { 
 		Observable<String> source = Observable.just(URL_CALL)
@@ -20,7 +20,7 @@ public class NestedHttp {
 	}
 	
 	public static void main(String[] args) { 
-		NestedHttp demo = new NestedHttp();
+		CallbackHeaven demo = new CallbackHeaven();
 		demo.run();
 	}
 }
