@@ -17,7 +17,21 @@ public class HttpGetExample {
 	private static final String URL_README = 
 			"https://raw.githubusercontent.com/yudong80/reactivejava/master/README.md";
 	
-	public void singleCallback() { 
+	public void get() { 
+		Request request = new Request.Builder()
+		        .url(URL_README)
+		        .build();
+		String response= "";
+		try {
+			response = client.newCall(request).execute().body().string();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Log.i(response);
+		CommonUtils.exampleComplete();
+	}
+	
+	public void callback() { 
 		Request request = new Request.Builder()
 	        .url(URL_README)
 	        .build();
@@ -37,6 +51,7 @@ public class HttpGetExample {
 		
 	public static void main(String[] args) { 
 		HttpGetExample demo = new HttpGetExample();
-		demo.singleCallback();
+		demo.get();
+		demo.callback();
 	}
 }

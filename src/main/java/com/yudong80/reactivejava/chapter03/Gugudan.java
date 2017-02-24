@@ -2,8 +2,6 @@ package com.yudong80.reactivejava.chapter03;
 
 import java.util.Scanner;
 
-import com.yudong80.reactivejava.common.ThreeSubscribers;
-
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
