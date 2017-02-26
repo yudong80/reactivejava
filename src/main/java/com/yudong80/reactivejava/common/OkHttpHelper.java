@@ -23,10 +23,8 @@ public class OkHttpHelper {
 		} 
 	}
 	
-	public static String get(String url, boolean showLog) throws IOException { 
-		if (showLog) { 
-			Log.d("OkHttp call URL = " + url);
-		}
+	public static String getWithLog(String url) throws IOException { 
+		Log.d("OkHttp call URL = " + url);
 		return get(url);
 	}	
 }

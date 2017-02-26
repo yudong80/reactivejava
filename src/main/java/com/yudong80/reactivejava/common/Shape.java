@@ -9,6 +9,8 @@ public class Shape {
 	public static final String PENTAGON = "PENTAGON";
 	public static final String BALL = "BALL";	
 	public static final String STAR = "STAR";
+	public static final String NO_SHAPE = "NO_SHAPE";
+	public static final String FLIPPED = "(flipped)";
 	
 	public static String getColor(String shape) { 
 		if (shape.endsWith("<>")) //diamond 
@@ -34,13 +36,32 @@ public class Shape {
 	}
 
 	public static String getShape(String obj) {
-		if (obj == null || obj.equals("")) return "NO-SHAPE";		
-		if (obj.endsWith("-H")) return "HEXAGON";
-		if (obj.endsWith("-O")) return "OCTAGON";
-		if (obj.endsWith("-R")) return "RECTANGLE";
-		if (obj.endsWith("-T")) return "TRIANGLE";
-		if (obj.endsWith("<>")) return "DIAMOND";
-		if (obj.endsWith("-P")) return "PETAGON";
+		if (obj == null || obj.equals("")) return NO_SHAPE;		
+		if (obj.endsWith("-H")) return HEXAGON;
+		if (obj.endsWith("-O")) return OCTAGON;
+		if (obj.endsWith("-R")) return RECTANGLE;
+		if (obj.endsWith("-T")) return TRIANGLE;
+		if (obj.endsWith("<>")) return DIAMOND;
+		if (obj.endsWith("-P")) return PENTAGON;
+		if (obj.endsWith("-S")) return STAR;
 		return "BALL";
+	}	
+	
+	public static String flip(String item) throws ShapeCannotFlipException { 
+		if(item.startsWith(FLIPPED)) { 
+			return item.replace(FLIPPED, "");
+		}
+		
+		String shape = getShape(item);
+		switch(shape) { 
+		case BALL:
+		case RECTANGLE:
+		case DIAMOND: 
+		case NO_SHAPE:
+			throw new ShapeCannotFlipException();
+			//return "throw new ShapeCannotFlipException()";
+		};
+		
+		return FLIPPED + item;		
 	}	
 }

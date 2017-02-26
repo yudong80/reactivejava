@@ -12,7 +12,11 @@ public class Log {
 	public static void i(String tag, Object obj) { 
 		System.out.println(getThreadName() + "| " + tag + " | value = " + obj);
 	}
-		
+
+	public static void v(Object obj) { 
+		System.out.println(getThreadName() + " | " + obj);
+	}
+	
 	public static void d(Object obj) { 
 		System.out.println(getThreadName() + " | debug = " + obj);
 	}
