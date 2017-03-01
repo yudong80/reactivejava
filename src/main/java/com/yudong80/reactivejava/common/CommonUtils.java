@@ -8,9 +8,9 @@ public class CommonUtils {
 	public static final String GITHUB_ROOT = "https://raw.githubusercontent.com/yudong80/reactivejava/master/";
 	
 	public static final String API_KEY = 
-//			"5712cae3137a8f6bcbebe4fb35dfb434";
+			"5712cae3137a8f6bcbebe4fb35dfb434";
 //			"e7681f2ac93cbdf1bc3952e30ab80533"; 
-			"fe6edeb30e2b9ee7848e4ded0491d8d1";
+//			"fe6edeb30e2b9ee7848e4ded0491d8d1";
 			
 	public static long startTime;
 

@@ -12,7 +12,7 @@ import static com.yudong80.reactivejava.common.CommonUtils.API_KEY;
 
 
 public class OpenWeatherMapV1 {
-	private static final String URL = "http://api.openweathermap.org/data/2.5/forecast/city?id=524901&APPID=";
+	private static final String URL = "http://api.openweathermap.org/data/2.5/weather?q=London&APPID=";
 	
 	public void run() { 
 		Observable<String> source = Observable.just(URL + API_KEY)

@@ -14,7 +14,7 @@ import static com.yudong80.reactivejava.common.CommonUtils.API_KEY;
 
 
 public class OpenWeatherMapV2 {
-	private static final String URL = "http://api.openweathermap.org/data/2.5/forecast/city?id=524901&APPID=";
+	private static final String URL = "http://api.openweathermap.org/data/2.5/weather?q=London&APPID=";
 	
 	//-> ConnectableObservable로 변경 
 	public void run() { 
