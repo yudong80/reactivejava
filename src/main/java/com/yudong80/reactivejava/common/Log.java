@@ -1,5 +1,7 @@
 package com.yudong80.reactivejava.common;
 
+import java.util.List;
+
 public class Log {
 	public static void d(String tag, Object obj) { 
 		System.out.println(getThreadName() + "| " + tag + " | debug = " + obj);
@@ -33,6 +35,18 @@ public class Log {
 		long time = System.currentTimeMillis() - CommonUtils.startTime;
 		System.out.println(getThreadName() + " | " + time + " | " + "value = " + obj);		
 	}
+	
+//	public static void it(List<String> list) { 
+//		long time = System.currentTimeMillis() - CommonUtils.startTime;
+//		StringBuffer sb = new StringBuffer();
+//		sb.append(getThreadName() + " | " + time + " | " + "value = {"); 
+//		for (String str : list) { 
+//			sb.append(str);
+//			sb.append(",");
+//		}
+//		sb.append("}");
+//		System.out.println(sb.toString().replace(",}", "}"));
+//	}
 
 	public static void dt(Object obj) { 
 		long time = System.currentTimeMillis() - CommonUtils.startTime;
@@ -42,6 +56,16 @@ public class Log {
 	public static void et(Object obj) { 
 		long time = System.currentTimeMillis() - CommonUtils.startTime;
 		System.out.println(getThreadName() + " | " + time + " | " + "error = " + obj);		
+	}
+
+	public static void onNextT(Object obj) { 
+		long time = System.currentTimeMillis() - CommonUtils.startTime;
+		System.out.println(getThreadName() + " | " + time + " | " + "onNext >> " + obj);		
+	}
+
+	public static void onCompleteT() { 
+		long time = System.currentTimeMillis() - CommonUtils.startTime;
+		System.out.println(getThreadName() + " | " + time + " | " + "onComplete");		
 	}
 	
 	public static String getThreadName() { 
