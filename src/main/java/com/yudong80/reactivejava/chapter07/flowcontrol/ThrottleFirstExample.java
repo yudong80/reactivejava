@@ -16,6 +16,7 @@ public class ThrottleFirstExample implements MarbleDiagram{
 		CommonUtils.exampleStart();
 		Observable<String> source = Observable.timer(100L, TimeUnit.MILLISECONDS)
 			.map(i -> data[0])
+			.take(1)
 			.doOnNext(Log::onNextT) //Red까지만
 			.concatWith(Observable.timer(300L, TimeUnit.MILLISECONDS)
 					  .map(i -> data[1])
