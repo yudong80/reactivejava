@@ -5,19 +5,19 @@ import com.yudong80.reactivejava.common.CommonUtils;
 import io.reactivex.subjects.BehaviorSubject;
 
 public class BehaviorSubjectExample {
-	public void basic() { 
-		BehaviorSubject<String> subject = BehaviorSubject.createDefault("Pupple");
-		subject.subscribe(str -> System.out.println("#1 => " + str));
-		subject.onNext("Red");
-		subject.onNext("Green");
-		subject.subscribe(str -> System.out.println("#2 => " + str));
-		subject.onNext("Blue");
+	public void marbleDiagram() { 
+		BehaviorSubject<String> subject = BehaviorSubject.createDefault("PUPPLE");
+		subject.subscribe(data -> System.out.println("Subscriber #1 => " + data));
+		subject.onNext("RED");
+		subject.onNext("GREEN");
+		subject.subscribe(data -> System.out.println("Subscriber #2 => " + data));
+		subject.onNext("BLUE");
 		subject.onComplete();
 		CommonUtils.exampleComplete();
 	}
 	
 	public static void main(String[] args) { 
 		BehaviorSubjectExample demo = new BehaviorSubjectExample();
-		demo.basic();
+		demo.marbleDiagram();
 	}
 }

@@ -6,42 +6,45 @@ import io.reactivex.Observable;
 import io.reactivex.subjects.AsyncSubject;
 
 public class AsyncSubjectExample {
-	public void basic() { 
+	public void marbleDiagram() { 
 		AsyncSubject<String> subject = AsyncSubject.create();
-		subject.subscribe(str -> System.out.println("Observer #1 => "+ str));
-		subject.onNext("Red");
-		subject.onNext("Green");
-		subject.subscribe(str -> System.out.println("Observer #2 => "+ str));
-		subject.onNext("Blue");
+		subject.subscribe(data -> System.out.println("Subscriber #1 => "+ data));
+		subject.onNext("RED");
+		subject.onNext("GREEN");
+		subject.subscribe(data -> System.out.println("Subscriber #2 => "+ data));
+		subject.onNext("BLUE");
 		subject.onComplete();
 		CommonUtils.exampleComplete();
 	}
 	
-	public void subscribeObservable() { 
+	public void asSubscriber() { 
 		Float[] temperature = { 10.1f, 13.4f, 12.5f  };
 		Observable<Float> source = Observable.fromArray(temperature);
 		
 		AsyncSubject<Float> subject = AsyncSubject.create();
+		subject.subscribe(data -> System.out.println("Subscriber #1 => " + data));	
+		
 		source.subscribe(subject);
-		subject.subscribe(System.out::println);	
 		CommonUtils.exampleComplete();		
 	}
 	
-	public void multiSubscribed() { 
+	public void afterComplete() { 
 		AsyncSubject<Integer> subject = AsyncSubject.create();
 		subject.onNext(10);
 		subject.onNext(11);
-		subject.subscribe(str -> System.out.println("#1 => " + str));
+		subject.subscribe(data -> System.out.println("Subscriber #1 => " + data));
 		subject.onNext(12);
 		subject.onComplete();
-		subject.subscribe(str -> System.out.println("#2 => " + str));
+		subject.onNext(13);
+		subject.subscribe(data -> System.out.println("Subscriber #2 => " + data));
+		subject.subscribe(data -> System.out.println("Subscriber #3 => " + data));
 		CommonUtils.exampleComplete();		
 	}
 	
 	public static void main(String[] args) { 
 		AsyncSubjectExample demo = new AsyncSubjectExample();
-		demo.basic(); 
-		demo.subscribeObservable();
-		demo.multiSubscribed();
+		demo.marbleDiagram(); 
+		demo.asSubscriber();
+		demo.afterComplete();
 	}
 }
