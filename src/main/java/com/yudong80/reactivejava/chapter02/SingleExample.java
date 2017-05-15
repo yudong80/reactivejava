@@ -14,28 +14,28 @@ public class SingleExample {
 	}
 	
 	public void fromObservable() {
-		//1. Single.fromObservable() 
+		//1. 기존 옵저버블에서 Single로 변환하기  
 		Observable<String> source = Observable.just("Hello Single");
 		Single.fromObservable(source)
 			.subscribe(System.out::println);
 		
-		//2. Observable.just() -> Single 
+		//2. single() 메소드를 호출하여 Single 생성하기 
 		Observable.just("Hello Single")
 			.single("default item")
 			.subscribe(System.out::println);
 		
-		//3. Observable.fromArray() -> Single 
+		//3. first() 메소드를 호출하여 Single 생성하기 
 		String[] colors = {"Red", "Blue", "Gold"};
 		Observable.fromArray(colors)
 			.first("default value")
 			.subscribe(System.out::println);
 		
-		//4. Observabke.empty() -> Single 
+		//4. empty 옵저버블에서 Single 생성하기 
 		Observable.empty()
 			.single("default value")
 			.subscribe(System.out::println);
 		
-		//5. Observable.take() -> Single 
+		//5. take() 함수에서 Single 생성하기 
 		Observable.just(new Order("ORD-1"), new Order("ORD-2"))
 				.take(1)
 				.single(new Order("default order"))
@@ -50,7 +50,8 @@ public class SingleExample {
 		
 	public static void main(String[] args) { 
 		SingleExample demo = new SingleExample();
-//		demo.just();
+		demo.just();
 		demo.fromObservable();
+//		demo.errorCase();
 	}
 }

@@ -8,8 +8,8 @@ import io.reactivex.Observable;
 
 public class ObservableFromArray {
 	public void integerArray() { 
-		Observable<Integer> source = Observable.fromArray(
-				new Integer[] {100,200,300});
+		Integer[] arr = {100, 200, 300};
+		Observable<Integer> source = Observable.fromArray(arr);
 		source.subscribe(System.out::println);		
 		CommonUtils.exampleComplete();
 	}

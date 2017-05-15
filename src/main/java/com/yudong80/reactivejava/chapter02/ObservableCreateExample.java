@@ -64,5 +64,6 @@ public class ObservableCreateExample {
 		demo.basic();
 		demo.notSubscribed();
 		demo.subscribeLambda();
+		demo.subscribeAnonymously();
 	}
 }

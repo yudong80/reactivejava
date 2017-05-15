@@ -37,7 +37,7 @@ public class ObservableFromFuture {
 	
 	public static void main(String[] args) { 
 		ObservableFromFuture demo = new ObservableFromFuture();
-		//demo.run();
+		demo.basic();
 		demo.withoutLambda();
 	}
 }
