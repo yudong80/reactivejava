@@ -29,7 +29,7 @@ public class FilterExample implements MarbleDiagram {
 		CommonUtils.exampleComplete();
 	}
 	
-	public void filterEvenNumber() { 
+	public void evenNumbers() { 
 		Integer[] data = {100, 34, 27, 99, 50};
 		Observable<Integer> source = Observable.fromArray(data)
 				.filter(number -> number % 2 == 0);
@@ -37,42 +37,42 @@ public class FilterExample implements MarbleDiagram {
 		CommonUtils.exampleComplete();
 	}
 	
-	public void showFilters() { 
-		Integer[] data = {100, 200, 300, 400, 500};
-		
-		//>> 결과가 예쁘게 나오게 소스를 다등자. 
-		
+	public void otherFilters() { 
+		Integer[] numbers = {100, 200, 300, 400, 500};
+		Single<Integer> single;
+		Observable<Integer> source;
+				
 		//1. first 
-		Single<Integer> source1 = Observable.fromArray(data).first(-1);
-		source1.subscribe(System.out::println);
+		single = Observable.fromArray(numbers).first(-1);
+		single.subscribe(data -> System.out.println("first() value = " + data));
 		
 		//2. last 
-		source1 = Observable.fromArray(data).last(999);
-		source1.subscribe(System.out::println);
+		single = Observable.fromArray(numbers).last(999);
+		single.subscribe(data -> System.out.println("last() value = " + data));
 		
 		//3. take(N) 
-		Observable<Integer> source2 = Observable.fromArray(data).take(3);
-		source2.subscribe(System.out::println);
+		source = Observable.fromArray(numbers).take(3);
+		source.subscribe(data -> System.out.println("take(3) values =" + data));
 
 		//4. takeLast(N) 
-		source2 = Observable.fromArray(data).takeLast(3);
-		source2.subscribe(System.out::println);
+		source = Observable.fromArray(numbers).takeLast(3);
+		source.subscribe(data -> System.out.println("takeLast(3) values =" + data));
 		
 		//5. skip(N) 
-		source2 = Observable.fromArray(data).skip(2);
-		source2.subscribe(System.out::println);
+		source = Observable.fromArray(numbers).skip(2);
+		source.subscribe(data -> System.out.println("skip(2) values = " + data));
 		
 		//6. skipLast(N) 
-		source2 = Observable.fromArray(data).skipLast(2);
-		source2.subscribe(System.out::println);
+		source = Observable.fromArray(numbers).skipLast(2);
+		source.subscribe(data -> System.out.println("skipLast(2) values = " + data));
 		CommonUtils.exampleComplete();
 	}	
 	
 	public static void main(String[] args) { 
 		FilterExample demo = new FilterExample();
-		demo.marbleDiagram();
-		demo.usingPredicate();
-		demo.filterEvenNumber();
-		demo.showFilters();
+//		demo.marbleDiagram();
+//		demo.usingPredicate();
+//		demo.evenNumbers();
+		demo.otherFilters();
 	}
 }

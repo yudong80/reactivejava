@@ -6,7 +6,7 @@ import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
 public class Gugudan {
-	public void oldSchool() { 
+	public void plainJava() { 
 		Scanner in = new Scanner(System.in);
 		System.out.println("Gugudan Input:");
 		int dan = Integer.parseInt(in.nextLine());
@@ -50,7 +50,7 @@ public class Gugudan {
 		in.close();
 	}					
 		
-	public void usingFlatMapWithResultSelector() { 
+	public void usingResultSelector() { 
 		Scanner in = new Scanner(System.in);
 		System.out.println("Gugudan Input:");
 		int dan = Integer.parseInt(in.nextLine());		
@@ -63,7 +63,8 @@ public class Gugudan {
 					
 	public static void main(String[] args) { 
 		Gugudan demo = new Gugudan();
-		//demo.retro();
+		//demo.plainJava();
+		//demo.reactiveV1();
 		demo.reactiveV2();
 	}
 }

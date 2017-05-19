@@ -11,12 +11,12 @@ public class FlatMapExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() { 
 		//함수를 별도로 정의하는 것이 가장 먼저 겪어야 할 관문임 
-		Function<String, Observable<String>> ballToDoubleDiamonds = 
+		Function<String, Observable<String>> getDoubleDiamonds = 
 				ball -> Observable.just(ball + "<>", ball + "<>");
 		
 		String[] balls = {"RED", "GREEN", "BLUE"}; 
 		Observable<String> source = Observable.fromArray(balls)
-				.flatMap(ballToDoubleDiamonds);
+				.flatMap(getDoubleDiamonds);
 		source.subscribe(Log::i);
 		CommonUtils.exampleComplete();
 	}

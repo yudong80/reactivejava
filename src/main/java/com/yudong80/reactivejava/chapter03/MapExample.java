@@ -18,17 +18,17 @@ public class MapExample implements MarbleDiagram {
 	}
 	
 	public void mapFunction() { 
-		Function<String, String> ballToDiamond = ball -> ball + "<>";
+		Function<String, String> getDiamond = ball -> ball + "<>";
 		
 		String[] balls = {"RED", "YELLOW", "GREEN", "BLUE"};
 		Observable<String> source = Observable.fromArray(balls)
-				.map(ballToDiamond);
+				.map(getDiamond);
 		source.subscribe(Log::i);
 		CommonUtils.exampleComplete();
 	}
 	
-	public void mapTypeConversion() { 
-		Function<String, Integer> ballToIndex = ball -> { 
+	public void mappingType() { 
+		Function<String, Integer> getIndex = ball -> { 
 			switch(ball){
 			case "RED": 		return 0;
 			case "YELLOW":		return 1;
@@ -40,7 +40,7 @@ public class MapExample implements MarbleDiagram {
 		
 		String[] balls = {"RED", "YELLOW", "GREEN", "BLUE"}; 
 		Observable<Integer> source = Observable.fromArray(balls)
-				.map(ballToIndex);   //명시적인 형 변환없이 바로 사용가능 
+				.map(getIndex);    
 		source.subscribe(Log::i);  
 		CommonUtils.exampleComplete();		
 	}	
@@ -53,6 +53,6 @@ public class MapExample implements MarbleDiagram {
 		MapExample demo = new MapExample();
 		demo.marbleDiagram();
 		demo.mapFunction();
-		demo.mapTypeConversion();
+		demo.mappingType();
 	}
 }
