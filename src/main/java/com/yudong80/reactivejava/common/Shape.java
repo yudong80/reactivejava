@@ -47,6 +47,10 @@ public class Shape {
 		return "BALL";
 	}	
 	
+	public static String getString(String color, String shape) { 
+		return color + getSuffix(shape);
+	}
+	
 	public static String flip(String item) throws ShapeCannotFlipException { 
 		if(item.startsWith(FLIPPED)) { 
 			return item.replace(FLIPPED, "");

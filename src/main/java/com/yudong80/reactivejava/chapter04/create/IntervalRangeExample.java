@@ -8,9 +8,8 @@ import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
 
-public class IntervalRangeExample implements MarbleDiagram{
-	@Override
-	public void marbleDiagram() { 
+public class IntervalRangeExample {
+	public void printNumbers() { 
 		Observable<Long> source = Observable.intervalRange(1, 
 				5, 
 				100L ,
@@ -33,7 +32,7 @@ public class IntervalRangeExample implements MarbleDiagram{
 	
 	public static void main(String[] args) { 
 		IntervalRangeExample demo = new IntervalRangeExample();
-		demo.marbleDiagram();
+		demo.printNumbers();
 		demo.makeWithInterval();
 	}
 }

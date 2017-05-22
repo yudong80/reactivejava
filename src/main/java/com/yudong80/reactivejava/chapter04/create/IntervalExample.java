@@ -8,12 +8,11 @@ import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
 
-public class IntervalExample implements MarbleDiagram{
-	@Override
-	public void marbleDiagram() { 
+public class IntervalExample {
+	public void printNumbers() { 
 		CommonUtils.exampleStart();
 		Observable<Long> source = Observable.interval(100L, TimeUnit.MILLISECONDS)
-				.map(val -> val + 100)
+				.map(data -> (data + 1) * 100)
 				.take(5);
 		source.subscribe(Log::it);
 		CommonUtils.sleep(1000);
@@ -32,7 +31,7 @@ public class IntervalExample implements MarbleDiagram{
 	
 	public static void main(String[] args) { 
 		IntervalExample demo = new IntervalExample();
-		demo.marbleDiagram();
-		demo.noInitialDelay();
+		demo.printNumbers();
+//		demo.noInitialDelay();
 	}
 }

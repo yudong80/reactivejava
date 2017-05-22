@@ -29,7 +29,7 @@ public class GroupByExample implements MarbleDiagram{
 				.groupBy(Shape::getShape);
 		
 		source.subscribe(obj -> {
-			obj.filter(val -> obj.getKey().equals("BALL"))
+			obj.filter(val -> obj.getKey().equals(Shape.BALL))
 			.subscribe(val -> 
 			System.out.println("GROUP:" + obj.getKey() + "\t Value:" + val));
 		});	

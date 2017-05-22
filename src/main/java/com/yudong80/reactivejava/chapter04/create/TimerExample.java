@@ -10,11 +10,11 @@ import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
 
-public class TimerExample implements MarbleDiagram {
-	public void marbleDiagram() {
+public class TimerExample {
+	public void showTime() {
 		CommonUtils.exampleStart();
 		Observable<String> source = Observable.timer(500L, TimeUnit.MILLISECONDS)
-				.map(noValue -> { 
+				.map(notUsed -> { 
 					return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
 							.format(new Date());
 				});
@@ -25,6 +25,6 @@ public class TimerExample implements MarbleDiagram {
 	
 	public static void main(String[] args) { 
 		TimerExample demo = new TimerExample(); 
-		demo.marbleDiagram();
+		demo.showTime();
 	}
 }
