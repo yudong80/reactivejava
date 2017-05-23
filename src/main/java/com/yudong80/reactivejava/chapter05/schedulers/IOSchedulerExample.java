@@ -9,10 +9,11 @@ import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
 public class IOSchedulerExample {
-	public void run() { 
-		//list up files on C drive root 
+	public void basic() { 
+		//list up files on C drive root
 		String root = "c:\\";
-		Observable<String> source = Observable.fromArray(new File(root).listFiles())
+		File[] files = new File(root).listFiles();		
+		Observable<String> source = Observable.fromArray(files)
 				.filter(f -> !f.isDirectory())
 				.map(f -> f.getAbsolutePath())
 				.subscribeOn(Schedulers.io());
@@ -24,6 +25,6 @@ public class IOSchedulerExample {
 	
 	public static void main(String[] args) { 
 		IOSchedulerExample demo = new IOSchedulerExample();
-		demo.run();
+		demo.basic();
 	}
 }

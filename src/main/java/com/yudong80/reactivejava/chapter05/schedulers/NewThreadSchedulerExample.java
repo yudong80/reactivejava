@@ -7,18 +7,18 @@ import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
 public class NewThreadSchedulerExample {
-	public void run() { 
-		String[] data = {"RED", "GREEN", "BLUE"};
-		Observable.fromArray(data)
-			.doOnNext(item -> Log.v("Original Value : " + item))
-			.map(item -> "<<" + item + ">>")
+	public void basic() { 
+		String[] orgs = {"RED", "GREEN", "BLUE"};
+		Observable.fromArray(orgs)
+			.doOnNext(data -> Log.v("Original data : " + data))
+			.map(data -> "<<" + data + ">>")
 			.subscribeOn(Schedulers.newThread())
 			.subscribe(Log::i);		
 		CommonUtils.sleep(500);
 		
-		Observable.fromArray(data)
-			.doOnNext(item -> Log.v("Original Value : " + item))
-			.map(item -> "##" + item + "##")
+		Observable.fromArray(orgs)
+			.doOnNext(data -> Log.v("Original data : " + data))
+			.map(data -> "##" + data + "##")
 			.subscribeOn(Schedulers.newThread())
 			.subscribe(Log::i);		
 		CommonUtils.sleep(500);
@@ -26,6 +26,6 @@ public class NewThreadSchedulerExample {
 	
 	public static void main(String[] args) { 
 		NewThreadSchedulerExample demo = new NewThreadSchedulerExample();
-		demo.run();
+		demo.basic();
 	}
 }

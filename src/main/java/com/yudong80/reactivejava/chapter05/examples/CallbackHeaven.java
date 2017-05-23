@@ -10,22 +10,39 @@ import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
 public class CallbackHeaven {
-	private static final String URL_CALL = "https://api.github.com/zen";
-	private static final String URL_ON_SUCCESS = GITHUB_ROOT + "/samples/callback_heaven";
+	private static final String FIRST_URL = "https://api.github.com/zen";
+	private static final String SECOND_URL = GITHUB_ROOT + "/samples/callback_heaven";
 	
-	public void run() { 
+	public void usingConcat() { 
 		CommonUtils.exampleStart();
-		Observable<String> source = Observable.just(URL_CALL)
+		Observable<String> source = Observable.just(FIRST_URL)
 			.subscribeOn(Schedulers.io())
 			.map(OkHttpHelper::get)
-			.concatWith(Observable.just(URL_ON_SUCCESS)
+			.concatWith(Observable.just(SECOND_URL)
 					           .map(OkHttpHelper::get));
 		source.subscribe(Log::it);
+		CommonUtils.sleep(5000);
+		CommonUtils.exampleComplete();
+	}
+
+	public void usingZip() { 
+		CommonUtils.exampleStart();
+		Observable<String> first = Observable.just(FIRST_URL)
+				.subscribeOn(Schedulers.io())
+				.map(OkHttpHelper::get);
+		Observable<String> second = Observable.just(SECOND_URL)
+				.subscribeOn(Schedulers.io())
+				.map(OkHttpHelper::get);
+		
+		Observable.zip(first, second, 
+				(a, b) -> ("\n>>" + a + "\n>>" + b))
+			.subscribe(Log::it);
 		CommonUtils.sleep(5000);
 	}
 	
 	public static void main(String[] args) { 
 		CallbackHeaven demo = new CallbackHeaven();
-		demo.run();
+//		demo.usingConcat();
+		demo.usingZip();
 	}
 }

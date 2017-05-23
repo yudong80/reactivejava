@@ -11,9 +11,10 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ExecutorSchedulerExample {
 	public void run() { 
+		final int THREAD_NUM = 10;
+		
 		String[] data = {"RED", "GREEN", "BLUE"};
 		Observable<String> source = Observable.fromArray(data);
-		final int THREAD_NUM = 10;
 		Executor executor = Executors.newFixedThreadPool(THREAD_NUM);
 		
 		source.subscribeOn(Schedulers.from(executor))

@@ -8,17 +8,17 @@ import io.reactivex.schedulers.Schedulers;
 
 public class TrampolineSchedulerExample {
 	public void run() { 
-		String[] data = {"RED", "GREEN", "BLUE"};		
-		Observable<String> source = Observable.fromArray(data);
+		String[] orgs = {"RED", "GREEN", "BLUE"};		
+		Observable<String> source = Observable.fromArray(orgs);
 		
 		//Subscription #1 
 		source.subscribeOn(Schedulers.trampoline())
-				.map(item -> "<<" + item + ">>")
+				.map(data -> "<<" + data + ">>")
 				.subscribe(Log::i);
 		
 		//Subscription #2 
 		source.subscribeOn(Schedulers.trampoline())
-				.map(item -> "##" + item + "##")
+				.map(data -> "##" + data + "##")
 				.subscribe(Log::i);
 		CommonUtils.sleep(500);		
 		CommonUtils.exampleComplete();

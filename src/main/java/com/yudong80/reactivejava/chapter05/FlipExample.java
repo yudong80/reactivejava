@@ -8,12 +8,12 @@ import com.yudong80.reactivejava.common.Shape;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
-public class FlipExampleV2 implements MarbleDiagram{
+public class FlipExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() {
-		String[] data = {"RED-S", "YELLOW-T", "GREEN-P"};
-		Observable<String> source = Observable.fromArray(data)
-				.doOnNext(item -> Log.v("Origianl value = " + item))
+		String[] objs = {"RED-S", "YELLOW-T", "GREEN-P"};
+		Observable<String> source = Observable.fromArray(objs)
+				.doOnNext(data -> Log.v("Origianl data = " + data))
 				.subscribeOn(Schedulers.newThread())
 				.observeOn(Schedulers.newThread())
 				.map(Shape::flip);
@@ -23,9 +23,9 @@ public class FlipExampleV2 implements MarbleDiagram{
 	}
 
 	public void observeOnRemoved() {
-		String[] data = {"RED-S", "YELLOW-T", "GREEN-P"};
-		Observable<String> source = Observable.fromArray(data)
-				.doOnNext(item -> Log.v("Origianl value = " + item))
+		String[] objs = {"RED-S", "YELLOW-T", "GREEN-P"};
+		Observable<String> source = Observable.fromArray(objs)
+				.doOnNext(data -> Log.v("Origianl data = " + data))
 				.subscribeOn(Schedulers.newThread())
 				//removed .observeOn(Schedulers.newThread())
 				.map(Shape::flip);
@@ -34,7 +34,7 @@ public class FlipExampleV2 implements MarbleDiagram{
 	}
 	
 	public static void main(String[] args) { 
-		FlipExampleV2 demo = new FlipExampleV2();
+		FlipExample demo = new FlipExample();
 		demo.marbleDiagram();
 		demo.observeOnRemoved();
 	}

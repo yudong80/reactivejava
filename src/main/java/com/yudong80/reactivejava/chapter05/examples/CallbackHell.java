@@ -12,8 +12,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class CallbackHell {
-	private static final String URL_CALL = "https://api.github.com/zen";
-	private static final String URL_ON_SUCCESS = GITHUB_ROOT + "/samples/callback_hell";
+	private static final String FIRST_URL = "https://api.github.com/zen";
+	private static final String SECOND_URL = GITHUB_ROOT + "/samples/callback_hell";
 
 	private final OkHttpClient client = new OkHttpClient();
 	
@@ -31,7 +31,7 @@ public class CallbackHell {
 	
 	public void run() { 
 		Request request = new Request.Builder()
-		        .url(URL_CALL)
+		        .url(FIRST_URL)
 		        .build();
 		client.newCall(request).enqueue(new Callback() {
 			@Override
@@ -45,7 +45,7 @@ public class CallbackHell {
 				
 				//add callback again
 				Request request = new Request.Builder()
-				        .url(URL_ON_SUCCESS)
+				        .url(SECOND_URL)
 				        .build();
 				client.newCall(request).enqueue(onSuccess);				
 			}			

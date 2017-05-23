@@ -9,12 +9,11 @@ import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
 public class ComputationSchedulerExample {
-	public void run() { 
-		String[] data = {"RED", "GREEN", "BLUE"};
-		Observable<String> source = Observable.interval(100L, TimeUnit.MILLISECONDS)
-			.map(Long::intValue)
-			.map(idx -> data[idx])
-			.take(data.length);
+	public void basic() { 
+		String[] orgs = {"RED", "GREEN", "BLUE"};
+		Observable<String> source = Observable.fromArray(orgs)
+			.zipWith(Observable.interval(100L, TimeUnit.MILLISECONDS), 
+					(a,b) -> a);
 		
 		//Subscription #1 
 		source.map(item -> "<<" + item + ">>")
@@ -31,6 +30,6 @@ public class ComputationSchedulerExample {
 	
 	public static void main(String[] args) { 
 		ComputationSchedulerExample demo = new ComputationSchedulerExample();
-		demo.run();
+		demo.basic();
 	}
 }
