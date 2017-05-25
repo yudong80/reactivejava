@@ -1,5 +1,7 @@
 package com.yudong80.reactivejava.chapter07;
 
+import java.util.concurrent.TimeUnit;
+
 import com.yudong80.reactivejava.common.CommonUtils;
 import com.yudong80.reactivejava.common.Log;
 
@@ -10,52 +12,49 @@ import io.reactivex.disposables.Disposable;
 
 public class DoOnExample {
 	public void basic() { 
-		String[] data = {"ONE", "TWO", "THREE"};
-		Observable<String> source = Observable.fromArray(data);
+		String[] orgs = {"RED", "GREEN", "BLUE"};
+		Observable<String> source = Observable.fromArray(orgs);
 		
-		source.doOnNext(val -> Log.d("onNext()", val))
+		source.doOnNext(data -> Log.d("onNext()", data))
 			.doOnComplete(() -> Log.d("onComplete()"))
 			.doOnError(e -> Log.e("onError()", e.getMessage()))
-			.subscribe(System.out::println);
+			.subscribe(Log::i);
 		CommonUtils.exampleComplete();
 	}
 	
 	public void withError() { 
-		Observable<String> source = Observable.create(
-			(ObservableEmitter<String> emitter) -> { 
-				emitter.onNext("ONE");
-				emitter.onNext("TWO");
-				emitter.onError(new Exception("Some Error"));
-			});
+		Integer[] divider = {10, 5, 0};  //0 으로는 나눌 수 없다 
 		
-		source.doOnNext(val -> Log.d("onNext()", val))
-		.doOnComplete(() -> Log.d("onComplete()"))
-		.doOnError(e -> Log.e("onError()", e.getMessage()))
-		.subscribe(System.out::println);			
+		Observable.fromArray(divider)
+				.map(div -> 1000 / div)
+				.doOnNext(data -> Log.d("onNext()", data))
+				.doOnComplete(() -> Log.d("onComplete()"))
+				.doOnError(e -> Log.e("onError()", e.getMessage()))
+				.subscribe(Log::i);			
 		CommonUtils.exampleComplete();
 	}
 	
 	public void doOnEach() { 
-		String[] data = {"ONE", "TWO", "THREE"};
-		Observable<String> source = Observable.fromArray(data);
+		String[] orgs = {"RED", "GREEN", "BLUE"};
+		Observable<String> source = Observable.fromArray(orgs);
 		
 		source.doOnEach(noti -> {
 			if (noti.isOnNext()) Log.d("onNext()", noti.getValue());
 			if (noti.isOnComplete()) Log.d("onComplete()");
 			if (noti.isOnError()) Log.e("onError()", noti.getError().getMessage());			
 			})
-			.subscribe(System.out::println);
+			.subscribe(Log::i);
 		CommonUtils.exampleComplete();		
 	}
 	
 	public void doOnEachObserver() { 
-		String[] data = {"ONE", "TWO", "THREE"};
-		Observable<String> source = Observable.fromArray(data);
+		String[] orgs = {"RED", "GREEN", "BLUE"};
+		Observable<String> source = Observable.fromArray(orgs);
 		
 		source.doOnEach(new Observer<String>() {
 			@Override
 			public void onSubscribe(Disposable d) {
-				Log.d("onSubscribe() is not working here!");
+				//doOnEach()에서는 onSubscribe()가 호출되지 않습니다. 
 			}
 
 			@Override
@@ -72,45 +71,49 @@ public class DoOnExample {
 			public void onComplete() {
 				Log.d("onComplete()");
 			}})
-			.subscribe(System.out::println);
+			.subscribe(Log::i);
 		CommonUtils.exampleComplete();
 	}
 	
 	public void doOnSubscribeAndDispose() { 
-		String[] data = {"ONE", "TWO", "THREE"};
-		Observable<String> source = Observable.fromArray(data);
+		String[] orgs = {"RED", "GREEN", "BLUE", "YELLOW", "PUPPLE"};
+		Observable<String> source = Observable.fromArray(orgs)
+			.zipWith(Observable.interval(100L, TimeUnit.MILLISECONDS), 
+					(a,b) -> a)
+			.doOnSubscribe(d -> Log.d("onSubscribe()"))
+			.doOnDispose(() -> Log.d("onDispose()"));
+		Disposable d = source.subscribe(Log::i);
 		
-		Disposable disposable = source.doOnSubscribe(d -> Log.d("onSubscribe()"))
-		.doOnDispose(() -> Log.d("onDispose()"))
-		.subscribe(System.out::println);
-		
-		CommonUtils.sleep(100);		
-		disposable.dispose();
-		CommonUtils.exampleComplete();
+		CommonUtils.sleep(200);
+		d.dispose();
+		CommonUtils.sleep(300);
+		CommonUtils.exampleComplete();	
 	}
 	
 	public void doOnLifecycle() { 
-		String[] data = {"ONE", "TWO", "THREE"};
-		Observable<String> source = Observable.fromArray(data);
-
-		Disposable disposable = source.doOnLifecycle(
-				d -> Log.d("onSubscribe()"), 
-				() -> Log.d("onDispose()"))
-		.subscribe(System.out::println);
+		String[] orgs = {"RED", "GREEN", "BLUE", "YELLOW", "PUPPLE"};
+		Observable<String> source = Observable.fromArray(orgs)
+			.zipWith(Observable.interval(100L, TimeUnit.MILLISECONDS), 
+					(a,b) -> a)
+			.doOnLifecycle(
+					d -> Log.d("onSubscribe()"), 
+					() -> Log.d("onDispose()"));
+		Disposable d = source.subscribe(Log::i);
 		
-		CommonUtils.sleep(100);
-		disposable.dispose();		
-		CommonUtils.exampleComplete();
+		CommonUtils.sleep(200);
+		d.dispose();
+		CommonUtils.sleep(300);
+		CommonUtils.exampleComplete();	
 	}
 	
 	public void doOnTerminate() { 
-		String[] data = {"ONE", "TWO", "THREE"};
-		Observable<String> source = Observable.fromArray(data);
+		String[] orgs = {"RED", "GREEN", "BLUE"};
+		Observable<String> source = Observable.fromArray(orgs);
 		
 		source.doOnTerminate(() -> Log.d("onTerminate()"))
 		.doOnComplete(() -> Log.d("onComplete()"))
 		.doOnError(e -> Log.e("onError()", e.getMessage()))
-		.subscribe(System.out::println);
+		.subscribe(Log::i);
 		CommonUtils.exampleComplete();	
 	}
 	

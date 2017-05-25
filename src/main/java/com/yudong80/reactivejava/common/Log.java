@@ -4,15 +4,15 @@ import java.util.List;
 
 public class Log {
 	public static void d(String tag, Object obj) { 
-		System.out.println(getThreadName() + "| " + tag + " | debug = " + obj);
+		System.out.println(getThreadName() + " | " + tag + " | debug = " + obj);
 	}
 	
 	public static void e(String tag, Object obj) { 
-		System.out.println(getThreadName() + "| " + tag + " | error = " + obj);		
+		System.out.println(getThreadName() + " | " + tag + " | error = " + obj);		
 	}
 
 	public static void i(String tag, Object obj) { 
-		System.out.println(getThreadName() + "| " + tag + " | value = " + obj);
+		System.out.println(getThreadName() + " | " + tag + " | value = " + obj);
 	}
 
 	public static void v(Object obj) { 
