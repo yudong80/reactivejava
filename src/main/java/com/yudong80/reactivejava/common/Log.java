@@ -30,7 +30,7 @@ public class Log {
 	public static void i(Object obj) { 
 		System.out.println(getThreadName() + " | value = " + obj);		
 	}
-	
+
 	public static void it(Object obj) { 
 		long time = System.currentTimeMillis() - CommonUtils.startTime;
 		System.out.println(getThreadName() + " | " + time + " | " + "value = " + obj);		

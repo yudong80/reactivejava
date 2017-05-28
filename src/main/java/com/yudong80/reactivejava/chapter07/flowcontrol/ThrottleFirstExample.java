@@ -12,22 +12,27 @@ public class ThrottleFirstExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() {
 		String[] data = {"RED", "YELLOW", "GREEN", "SKY", "BLUE", "PUPPLE"};
-		
 		CommonUtils.exampleStart();
-		Observable<String> source = Observable.timer(100L, TimeUnit.MILLISECONDS)
-			.map(i -> data[0])
-			.take(1)
-			.doOnNext(Log::onNextT) //Red까지만
-			.concatWith(Observable.timer(300L, TimeUnit.MILLISECONDS)
-					  .map(i -> data[1])
-					  .doOnNext(Log::onNextT)) //Yellow 만 
-			.concatWith(Observable.interval(100L, TimeUnit.MILLISECONDS)
-								  .map(Long::intValue)
-								  .map(i -> data[2 + i])
-								  .take(4)
-								  .doOnNext(Log::onNextT)
-								  .doOnComplete(Log::onCompleteT)) //Pupple까지 발행  
-			.throttleFirst(200L, TimeUnit.MILLISECONDS);
+		
+		//앞의 1개는 100ms 간격으로 발행 
+		Observable<String> earlySource = Observable.just(data[0])
+				.zipWith(Observable.timer(100L, TimeUnit.MILLISECONDS), (a,b) -> a);
+		
+		//다음  1개는 300ms 후에 발행 
+		Observable<String> middleSource = Observable.just(data[1])
+				.zipWith(Observable.timer(300L, TimeUnit.MILLISECONDS), (a,b) -> a);
+		
+		//마지막 4개는 100ms 후에 발행 
+		Observable<String> lateSource = Observable.just(data[2], data[3], data[4], data[5])
+				.zipWith(Observable.interval(100L, TimeUnit.MILLISECONDS), (a,b) -> a)
+				.doOnNext(Log::dt);
+		
+		//200ms 간격으로 throttleFirst() 실행함   
+		Observable<String> source = Observable.concat(
+				earlySource,
+				middleSource,
+				lateSource)
+				.throttleFirst(200L, TimeUnit.MILLISECONDS);
 		
 		source.subscribe(Log::it);
 		CommonUtils.sleep(1000);

@@ -11,7 +11,9 @@ public class CommonUtils {
 			"5712cae3137a8f6bcbebe4fb35dfb434";
 //			"e7681f2ac93cbdf1bc3952e30ab80533"; 
 //			"fe6edeb30e2b9ee7848e4ded0491d8d1";
-			
+	
+	public static final String ERROR_CODE = "-500";
+	
 	public static long startTime;
 
 	public static void exampleStart() {
@@ -53,7 +55,7 @@ public class CommonUtils {
 		try {
 			return InetAddress.getByName("www.google.com").isReachable(1000);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.v("Network is not available");	
 		}
 		return false;
 	}

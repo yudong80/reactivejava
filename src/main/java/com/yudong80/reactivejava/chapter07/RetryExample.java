@@ -8,71 +8,81 @@ import com.yudong80.reactivejava.common.OkHttpHelper;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableSource;
+import io.reactivex.schedulers.Schedulers;
 
 public class RetryExample {
-	public void retry5() { 
+	public void retry5() {
+		CommonUtils.exampleStart();
+		
 		String url = "https://api.github.com/zen";
 		Observable<String> source = Observable.just(url)
-			.map(OkHttpHelper::get)
-			.retry(5);
+			.map(OkHttpHelper::getT)
+			.retry(5)
+			.onErrorReturn(e -> CommonUtils.ERROR_CODE);
 		
-		source.subscribe(Log::i);
+		source.subscribe(data -> Log.it("result : " + data));
 		CommonUtils.exampleComplete();
 	}	
-	
-	public void retry5NoError() { 
-		String url = "https://api.github.com/zen";
-		Observable<String> source = Observable.just(url)
-			.map(OkHttpHelper::get)
-			.retry(5)
-			.onErrorReturnItem("NO ERROR");
+
+	public void retryWithDelay() {
+		final int RETRY_MAX = 5;
+		final int RETRY_DELAY = 1000;
 		
-		source.subscribe(Log::i);
-		CommonUtils.exampleComplete();
-	}		
-	
-	public void retryOnCount() {
+		CommonUtils.exampleStart();
+		
 		String url = "https://api.github.com/zen";
 		Observable<String> source = Observable.just(url)
-			.map(OkHttpHelper::get)
-			.retry((Integer cnt, Throwable t) -> { 
-				Log.d("Retry count: " + cnt + " / Error :" + t.getMessage());
-				if (cnt < 5) return true;				
-				return false; //stop
+			.map(OkHttpHelper::getT)
+			.retry((retryCnt, e) -> {
+				Log.e("retryCnt = " + retryCnt);
+				CommonUtils.sleep(RETRY_DELAY);
+				
+				return retryCnt < RETRY_MAX ? true: false;
 			})
-			.onErrorReturnItem("NO ERROR");
+			.onErrorReturn(e -> CommonUtils.ERROR_CODE);
 		
-		source.subscribe(Log::i);
-		CommonUtils.exampleComplete();		
-	}
-	
+		source.subscribe(data -> Log.it("result : " + data));
+		CommonUtils.exampleComplete();
+	}	
+		
 	public void retryUntil() { 
+		CommonUtils.exampleStart();
+		
 		String url = "https://api.github.com/zen";
 		Observable<String> source = Observable.just(url)
-			.map(OkHttpHelper::get)
-			.retryUntil(CommonUtils::isNetworkAvailable);
+			.map(OkHttpHelper::getT)
+			.subscribeOn(Schedulers.io())
+			.retryUntil(() -> { 
+				if(CommonUtils.isNetworkAvailable()) 
+					return true; //stop 
+				
+				CommonUtils.sleep(1000);
+				return false; //continue 
+			});
 		source.subscribe(Log::i);
+		
+		CommonUtils.sleep(5000);
 		CommonUtils.exampleComplete();		
 	}
 	
 	public void retryWhen() { 
-		Observable.create((ObservableEmitter<String> emitter) -> { 
-			emitter.onError(new RuntimeException("always fails"));
-		}).retryWhen(attempts -> {
-			return attempts.zipWith(Observable.range(1, 3), (n,i) -> i)
-					.flatMap( i-> { 
-						Log.d("delay retry by " + i + " seconds");
-						return Observable.timer(i, TimeUnit.SECONDS);
-					});
-		}).blockingForEach(Log::d);				
+		 Observable.create((ObservableEmitter<String> emitter) -> {
+		      System.out.println("subscribing");
+		      emitter.onError(new RuntimeException("always fails"));
+		  }).retryWhen(attempts -> {
+		      return attempts.zipWith(Observable.range(1, 3), (n, i) -> i).flatMap(i -> {
+		          System.out.println("delay retry by " + i + " second(s)");
+		          return Observable.timer(i, TimeUnit.SECONDS);
+		      });
+		  }).blockingForEach(System.out::println);
 	}
 	
 	public static void main(String[] args) { 
 		RetryExample demo = new RetryExample();
-//		demo.retry5();
-//		demo.retry5NoError();
-//		demo.retryOnCount();
+		demo.retry5();
+//		demo.retryWithDelay();
 //		demo.retryUntil();
-		demo.retryWhen();
+//		demo.retryWhen();
 	}
 }
