@@ -34,7 +34,7 @@ public class JUnit5Basic {
 		Observable<String> source = Observable.fromArray(data)
 				.map(Shape::getShape);
 		
-		String[] expected = {"BALL", "RECTANGLE", "TRIANGLE"};
+		String[] expected = {Shape.BALL, Shape.RECTANGLE, Shape.TRIANGLE};
 		List<String> actual = new ArrayList<>();
 		source.doOnNext(Log::d)
 		.subscribe(actual::add);
