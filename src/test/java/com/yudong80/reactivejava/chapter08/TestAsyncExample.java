@@ -24,7 +24,7 @@ public class TestAsyncExample {
 
 	@DisplayName("test Observable.interval() wrong")
 	@Test
-	@Disabled
+	@Disabled  //테스트 코드를 비활화시키는 경우에는  @Disable을 추가합니다. 
 	void testIntervalWrongWay() { 
 		Observable<Integer> source = Observable.interval(100L, TimeUnit.MILLISECONDS)
 				.take(5)
@@ -48,17 +48,19 @@ public class TestAsyncExample {
 		CommonUtils.exampleComplete();
 	}	
 	
-	@DisplayName("test HTTP")
+	@DisplayName("test Github v3 API on HTTP")
 	@Test
 	void testHttp() { 
 		final String url = "https://api.github.com/users/yudong80";
 		Observable<String> source = Observable.just(url)
-				.observeOn(Schedulers.io())
+				.subscribeOn(Schedulers.io())
 				.map(OkHttpHelper::get)
-				.map(json -> GsonHelper.parseValue(json,"name"));
+				.doOnNext(Log::d)				
+				.map(json -> GsonHelper.parseValue(json,"name"))
+				.observeOn(Schedulers.newThread());
 		
 		String expected = "Dong Hwan Yu";
-		source.doOnNext(Log::d)
+		source.doOnNext(Log::i)
 			.test()
 			.awaitDone(3, TimeUnit.SECONDS)
 			.assertResult(expected);

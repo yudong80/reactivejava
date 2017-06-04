@@ -13,21 +13,21 @@ import io.reactivex.ObservableEmitter;
 @RunWith(JUnitPlatform.class)
 public class TestObserverExample {
 	
-	@DisplayName("assertResult() : getShape()")
+	@DisplayName("#1: using TestObserver for Shape.getShape()")
 	@Test
-	void assertResultGetShape() { 
+	void testGetShapeUsingTestObserver() { 
 		String[] data = {"RED", "BLUE-R", "YELLOW-T"};
 		Observable<String> source = Observable.fromArray(data)
 				.map(Shape::getShape);
 
-		String[] expected = {"BALL", "RECTANGLE", "TRIANGLE"};		
+		String[] expected = {Shape.BALL, Shape.RECTANGLE, Shape.TRIANGLE};		
 		source.test()
 		.assertResult(expected);		
 	}
 	
 	@DisplayName("assertFailure() example")
 	@Test
-	void assertFailure() { 
+	void assertFailureExample() { 
 		String[] data = {"100", "200", "%300"};
 		Observable<Integer> source = Observable.fromArray(data)
 				.map(Integer::parseInt);
@@ -45,7 +45,7 @@ public class TestObserverExample {
 		
 		source.test()
 		.assertFailureAndMessage(NumberFormatException.class, 
-				"XXXFor input string: \"%300\"", 
+				"For input string: \"%300\"", 
 				100, 200);		
 	}
 

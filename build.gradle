@@ -13,7 +13,7 @@ dependencies {
 	compile 'org.apache.commons:commons-lang3:3.1'
 	compile "com.github.akarnokd:rxjava2-extensions:0.15.2"
 	
-	testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.0-M3'
-	testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.0-M3'
-	testCompile 'org.junit.platform:junit-platform-runner:1.0.0-M3'
+	testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.0-M4'
+	testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.0-M4'
+	testCompile 'org.junit.platform:junit-platform-runner:1.0.0-M4'
 }
