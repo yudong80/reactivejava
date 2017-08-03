@@ -106,6 +106,19 @@ public class ExceptionHandling {
 //		demo.onError();
 //		demo.onErrorReturn();
 //		demo.onErrorReturnItem();
-		demo.onErrorResumeNext();
+//		demo.onErrorResumeNext();
+		demo.test();
+	}
+	
+	private void test() { 
+		Observable.just(1,0)
+		.map(v -> {
+			try { 
+				return 100 / v;
+			} catch (ArithmeticException e) { 
+				throw e;
+			}
+		}).subscribe(v -> System.out.println("value = " + v), 
+				e -> e.printStackTrace());		
 	}
 }
