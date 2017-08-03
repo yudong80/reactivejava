@@ -63,8 +63,10 @@ public class Gugudan {
 					
 	public static void main(String[] args) { 
 		Gugudan demo = new Gugudan();
-		//demo.plainJava();
-		//demo.reactiveV1();
-		demo.reactiveV2();
+//		demo.plainJava();
+//		demo.reactiveV1();
+//		demo.reactiveV2();
+		demo.reactiveV3();
+//		demo.usingResultSelector();
 	}
 }

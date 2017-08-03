@@ -7,11 +7,18 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Predicate;
 
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.YELLOW;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.SKY;
+import static com.yudong80.reactivejava.common.Shape.BLUE;
+import static com.yudong80.reactivejava.common.Shape.PUPPLE;
+
 public class FilterExample implements MarbleDiagram {
 	@Override
 	public void marbleDiagram() { 
-		String[] objs = {"RED CIRCLE", "YELLOW DIAMOND", "GREEN TRIANGLE", 
-				"SKY DIAMOND", "BLUE CIRCLE", "PUPPLE HEXAGON"};
+		String[] objs = {RED+" CIRCLE", YELLOW+" DIAMOND", GREEN+" TRIANGLE", 
+				SKY+" DIAMOND", BLUE+" CIRCLE", PUPPLE+" HEXAGON"}; //1,2,3,4,5,6
 		Observable<String> source = Observable.fromArray(objs)
 				.filter(obj -> obj.endsWith("CIRCLE"));
 		source.subscribe(System.out::println);
@@ -70,9 +77,9 @@ public class FilterExample implements MarbleDiagram {
 	
 	public static void main(String[] args) { 
 		FilterExample demo = new FilterExample();
-//		demo.marbleDiagram();
+		demo.marbleDiagram();
 //		demo.usingPredicate();
 //		demo.evenNumbers();
-		demo.otherFilters();
+//		demo.otherFilters();
 	}
 }

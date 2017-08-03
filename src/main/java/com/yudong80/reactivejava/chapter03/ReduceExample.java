@@ -7,9 +7,13 @@ import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.functions.BiFunction;
 
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.BLUE;
+
 public class ReduceExample implements MarbleDiagram {
 	public void marbleDiagram() { 
-		String[] balls = {"RED", "GREEN", "BLUE"};
+		String[] balls = {RED, GREEN, BLUE}; //1,3,5
 		Maybe<String> source = Observable.fromArray(balls)
 				.reduce((ball1, ball2) -> ball2 + "(" + ball1 + ")");
 		source.subscribe(System.out::println);
@@ -20,7 +24,7 @@ public class ReduceExample implements MarbleDiagram {
 		BiFunction<String, String, String> mergeBalls = 
 				(ball1, ball2) -> ball2 + "(" + ball1 + ")";
 		
-		String[] balls = {"RED", "GREEN", "BLUE"};
+		String[] balls = {RED, GREEN, BLUE};
 		Maybe<String> source = Observable.fromArray(balls)
 				.reduce(mergeBalls);
 		source.subscribe(System.out::println);

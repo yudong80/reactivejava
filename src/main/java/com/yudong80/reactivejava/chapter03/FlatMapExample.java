@@ -7,6 +7,10 @@ import com.yudong80.reactivejava.common.MarbleDiagram;
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.BLUE;
+
 public class FlatMapExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() { 
@@ -14,7 +18,7 @@ public class FlatMapExample implements MarbleDiagram{
 		Function<String, Observable<String>> getDoubleDiamonds = 
 				ball -> Observable.just(ball + "<>", ball + "<>");
 		
-		String[] balls = {"RED", "GREEN", "BLUE"}; 
+		String[] balls = {RED, GREEN, BLUE}; 
 		Observable<String> source = Observable.fromArray(balls)
 				.flatMap(getDoubleDiamonds);
 		source.subscribe(Log::i);
@@ -23,7 +27,7 @@ public class FlatMapExample implements MarbleDiagram{
 
 	public void flatMapLambda() { 
 		//Observable안에 Observable을 넣는다는 것이 직관적이지는 않음 		
-		String[] balls = {"RED", "GREEN", "BLUE"}; 
+		String[] balls = {RED, GREEN, BLUE}; 
 		Observable<String> source = Observable.fromArray(balls)
 				.flatMap(ball -> Observable.just(ball + "<>", ball + "<>"));
 		source.subscribe(Log::i);
@@ -34,5 +38,6 @@ public class FlatMapExample implements MarbleDiagram{
 	public static void main(String[] args) { 
 		FlatMapExample demo = new FlatMapExample();
 		demo.marbleDiagram();
+		demo.flatMapLambda();
 	}
 }

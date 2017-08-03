@@ -59,4 +59,8 @@ public class CommonUtils {
 		}
 		return false;
 	}
+	
+	public static int toInt(String val) { 
+		return Integer.parseInt(val);
+	}
 }

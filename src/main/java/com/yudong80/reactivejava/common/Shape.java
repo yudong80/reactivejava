@@ -12,6 +12,14 @@ public class Shape {
 	public static final String NO_SHAPE = "NO_SHAPE";
 	public static final String FLIPPED = "(flipped)";
 	
+	//Colors for shape 
+	public static final String RED = "1";
+	public static final String YELLOW = "2";
+	public static final String GREEN = "3";
+	public static final String SKY = "4";
+	public static final String BLUE = "5";
+	public static final String PUPPLE = "6";	
+	
 	public static String getColor(String shape) { 
 		if (shape.endsWith("<>")) //diamond 
 			return shape.replace("<>", "").trim();
