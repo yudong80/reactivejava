@@ -76,4 +76,8 @@ public class Shape {
 		
 		return FLIPPED + item;		
 	}	
+	
+	public static String triangle(String color) { 
+		return color + "-T";
+	}
 }

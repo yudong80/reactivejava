@@ -9,14 +9,19 @@ import com.yudong80.reactivejava.common.OkHttpHelper;
 
 import io.reactivex.Observable;
 
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.BLUE;
+
 public class RepeatExample implements MarbleDiagram {
 	public void marbleDiagram() { 
-		String[] balls = {"RED", "GREEN", "BLUE"};
+		String[] balls = {RED, GREEN, BLUE};
 		Observable<String> source = Observable.fromArray(balls)
 				.repeat(3);
 		
 		source.doOnComplete(() -> Log.d("onComplete"))
 		.subscribe(Log::i);
+		CommonUtils.exampleComplete();
 	}
 	
 	public void heartbeatV1() { 
@@ -34,7 +39,7 @@ public class RepeatExample implements MarbleDiagram {
 	
 	public static void main(String[] args) { 
 		RepeatExample demo = new RepeatExample();
-//		demo.marbleDiagram();
+		demo.marbleDiagram();
 		demo.heartbeatV1();
 	}
 }

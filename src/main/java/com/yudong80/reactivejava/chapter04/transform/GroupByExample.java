@@ -7,10 +7,15 @@ import com.yudong80.reactivejava.common.Shape;
 import io.reactivex.Observable;
 import io.reactivex.observables.GroupedObservable;
 
+import static com.yudong80.reactivejava.common.Shape.PUPPLE;
+import static com.yudong80.reactivejava.common.Shape.SKY;
+import static com.yudong80.reactivejava.common.Shape.YELLOW;
+import static com.yudong80.reactivejava.common.Shape.triangle;
+
 public class GroupByExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() { 
-		String[] objs = {"PUPPLE", "SKY", "YELLOW-T", "YELLOW", "PUPPLE-T", "SKY-T"};
+		String[] objs = {PUPPLE, SKY, triangle(YELLOW), YELLOW, triangle(PUPPLE), triangle(SKY)};
 		Observable<GroupedObservable<String, String>> source = 
 				Observable.fromArray(objs)
 				.groupBy(Shape::getShape);
@@ -23,7 +28,7 @@ public class GroupByExample implements MarbleDiagram{
 	}
 	
 	public void filterBallGroup() { 
-		String[] objs = {"PUPPLE", "SKY", "YELLOW-T", "YELLOW", "PUPPLE-T", "SKY-T"};
+		String[] objs = {PUPPLE, SKY, triangle(YELLOW), YELLOW, triangle(PUPPLE), triangle(SKY)};
 		Observable<GroupedObservable<String, String>> source = 
 				Observable.fromArray(objs)
 				.groupBy(Shape::getShape);
