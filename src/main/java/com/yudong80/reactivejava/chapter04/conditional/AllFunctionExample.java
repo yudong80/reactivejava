@@ -7,10 +7,15 @@ import com.yudong80.reactivejava.common.Shape;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.SKY;
+import static com.yudong80.reactivejava.common.Shape.YELLOW;
+
 public class AllFunctionExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() { 
-		String[] data = {"RED", "YELLOW", "GREEN", "SKY"};
+		String[] data = {RED, YELLOW, GREEN, SKY};
 		
 		Single<Boolean> source = Observable.fromArray(data)
 			.map(Shape::getShape)

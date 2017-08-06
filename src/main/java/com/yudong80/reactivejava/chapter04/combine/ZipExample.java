@@ -9,16 +9,26 @@ import com.yudong80.reactivejava.common.Shape;
 
 import io.reactivex.Observable;
 
+import static com.yudong80.reactivejava.common.Shape.YELLOW;
+import static com.yudong80.reactivejava.common.Shape.PUPPLE;
+import static com.yudong80.reactivejava.common.Shape.SKY;
+import static com.yudong80.reactivejava.common.Shape.BALL;
+import static com.yudong80.reactivejava.common.Shape.PENTAGON;
+import static com.yudong80.reactivejava.common.Shape.STAR;
+
+import static com.yudong80.reactivejava.common.Shape.triangle;
+
+
 public class ZipExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram(){
-		String[] data1 = {"BALL", "PENTAGON", "STAR"};
-		String[] data2 = {"YELLOW-T", "PUPPLE-T", "SKY-T"};
+		String[] shapes = {BALL, PENTAGON, STAR};
+		String[] coloredTriangles = {triangle(YELLOW), triangle(PUPPLE), triangle(SKY)};
 		
 		Observable<String> source = Observable.zip(
-			Observable.fromArray(data1)
+			Observable.fromArray(shapes)
 					.map(Shape::getSuffix), 
-			Observable.fromArray(data2)
+			Observable.fromArray(coloredTriangles)
 					.map(Shape::getColor),
 			(suffix, color) -> color + suffix); 
 		
@@ -36,17 +46,7 @@ public class ZipExample implements MarbleDiagram{
 		CommonUtils.exampleComplete();
 	}
 
-	public void zipWithNumbers() {
-		Observable<Integer> source = Observable.zip(
-			Observable.just(100, 200, 300),
-			Observable.just(10, 20, 30), 
-			(a, b) -> a + b)
-			.zipWith(Observable.just(1, 2, 3), (ab, c) -> ab + c);
-		source.subscribe(Log::i);
-		CommonUtils.exampleComplete();
-	}
-	
-	public void intervalZip() { 
+	public void zipInterval() { 
 		Observable<String> source = Observable.zip(
 				Observable.just("RED", "GREEN", "BLUE"),
 				Observable.interval(200L, TimeUnit.MILLISECONDS),
@@ -58,11 +58,21 @@ public class ZipExample implements MarbleDiagram{
 		CommonUtils.exampleComplete();		
 	}	
 	
+	public void zipWithNumbers() {
+		Observable<Integer> source = Observable.zip(
+			Observable.just(100, 200, 300),
+			Observable.just(10, 20, 30), 
+			(a, b) -> a + b)
+			.zipWith(Observable.just(1, 2, 3), (ab, c) -> ab + c);
+		source.subscribe(Log::i);
+		CommonUtils.exampleComplete();
+	}
+	
 	public static void main(String[] args) { 
 		ZipExample demo = new ZipExample();
-//		demo.marbleDiagram();
-//		demo.zipNumbers();
-//		demo.intervalZip();
+		demo.marbleDiagram();
+		demo.zipNumbers();
+		demo.zipInterval();
 		demo.zipWithNumbers();
 	}
 }

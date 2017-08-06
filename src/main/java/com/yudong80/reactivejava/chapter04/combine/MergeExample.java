@@ -8,11 +8,17 @@ import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
 
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.YELLOW;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.SKY;
+import static com.yudong80.reactivejava.common.Shape.PUPPLE;
+
 public class MergeExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() { 
-		String[] data1 = {"RED", "GREEN"};
-		String[] data2 = {"YELLOW", "SKY", "PUPPLE"};
+		String[] data1 = {RED, GREEN}; //1, 3
+		String[] data2 = {YELLOW, SKY, PUPPLE}; //2, 4, 6
 		
 		Observable<String> source1 = Observable.interval(0L, 100L, TimeUnit.MILLISECONDS)
 				.map(Long::intValue)

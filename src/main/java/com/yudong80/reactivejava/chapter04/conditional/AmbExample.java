@@ -10,11 +10,18 @@ import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
 
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.YELLOW;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.SKY;
+import static com.yudong80.reactivejava.common.Shape.BLUE;
+import static com.yudong80.reactivejava.common.Shape.rectangle;
+
 public class AmbExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() { 
-		String[] data1 = {"RED", "GREEN", "BLUE"};
-		String[] data2 = {"YELLOW-R", "SKY-R"};
+		String[] data1 = {RED, GREEN, BLUE};
+		String[] data2 = {rectangle(YELLOW), rectangle(SKY)};
 		
 		List<Observable<String>> sources = Arrays.asList(
 				Observable.fromArray(data1)

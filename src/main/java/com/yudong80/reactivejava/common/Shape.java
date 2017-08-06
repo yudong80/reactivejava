@@ -19,6 +19,7 @@ public class Shape {
 	public static final String SKY = "4";
 	public static final String BLUE = "5";
 	public static final String PUPPLE = "6";	
+	public static final String ORANGE = "7";	
 	
 	public static String getColor(String shape) { 
 		if (shape.endsWith("<>")) //diamond 
@@ -80,4 +81,8 @@ public class Shape {
 	public static String triangle(String color) { 
 		return color + "-T";
 	}
+
+	public static String rectangle(String color) { 
+		return color + "-R";
+	}	
 }

@@ -10,23 +10,29 @@ import com.yudong80.reactivejava.common.Shape;
 import io.reactivex.Observable;
 import io.reactivex.functions.BiFunction;
 
+import static com.yudong80.reactivejava.common.Shape.YELLOW;
+import static com.yudong80.reactivejava.common.Shape.ORANGE;
+import static com.yudong80.reactivejava.common.Shape.PUPPLE;
+import static com.yudong80.reactivejava.common.Shape.SKY;
+import static com.yudong80.reactivejava.common.Shape.DIAMOND;
+import static com.yudong80.reactivejava.common.Shape.PENTAGON;
+import static com.yudong80.reactivejava.common.Shape.STAR;
+
 public class CombineLatestExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() { 
-		String[] data1 = {"PUPPLE", "ORANGE", "SKY", "YELLOW"};
-		String[] data2 = {"DIAMOND", "STAR", "PENTAGON"};
+		String[] data1 = {PUPPLE, ORANGE, SKY, YELLOW}; //6, 7, 4, 2
+		String[] data2 = {DIAMOND, STAR, PENTAGON};
 		
 		Observable<String> source = Observable.combineLatest(
-				Observable.interval(100L, TimeUnit.MILLISECONDS)
-						  .map(Long::intValue)
-						  .map(i -> data1[i])
-						  .map(Shape::getColor)
-						  .take(data1.length),
-				Observable.interval(150L, 200L, TimeUnit.MILLISECONDS)
-						  .map(Long::intValue)
-						  .map(i -> data2[i])
-						  .map(Shape::getSuffix)
-						  .take(data2.length),
+				Observable.fromArray(data1)  
+						  .zipWith( //zipWith()로 깔끔하게 코드 정리
+						      Observable.interval(100L, TimeUnit.MILLISECONDS), 
+							  (shape, notUsed) -> Shape.getColor(shape)),	  
+				Observable.fromArray(data2)
+				          .zipWith(
+				        	  Observable.interval(150L, 200L, TimeUnit.MILLISECONDS),	  
+				        	  (shape, notUsed) -> Shape.getSuffix(shape)),
 				(v1, v2) -> v1 + v2);
 		
 		source.subscribe(Log::i);

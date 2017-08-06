@@ -8,12 +8,18 @@ import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
 
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.YELLOW;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.SKY;
+import static com.yudong80.reactivejava.common.Shape.ORANGE;
+
 public class DelayExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() {
 		CommonUtils.exampleStart();
 		
-		String[] data = {"RED", "ORANGE", "YELLOW", "GREEN", "SKY"};
+		String[] data = {RED, ORANGE, YELLOW, GREEN, SKY};
 		Observable<String> source = Observable.fromArray(data)
 				.delay(100L, TimeUnit.MILLISECONDS);
 		source.subscribe(Log::it);
