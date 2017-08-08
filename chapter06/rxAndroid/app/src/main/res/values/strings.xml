@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">RxAndroid</string>
+    <string name="str_btn_scheduler">Scheduler</string>
+    <string name="str_btn_polling">Polling</string>
+    <string name="str_btn_hello">Hello</string>
+    <string name="btn_start">Start</string>
+    <string name="str_btn_observer">Click Observer</string>
+    <string name="hello">Hello world</string>
+    <string name="str_btn_recycle">recyclerview</string>
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAlignment="center"-->
+        <!--android:text="tttt"-->
+        <!--android:textSize="30sp"/>-->
+
+    <EditText
+        android:id="@+id/dsf_input_deb_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter search text"/>
+
+    <ListView
+        android:id="@+id/dsf_lv_log"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        />
+
+</LinearLayout>

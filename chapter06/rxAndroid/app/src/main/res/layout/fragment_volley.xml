@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/vf_btn_get"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GET defer::just"/>
+
+    <Button
+        android:id="@+id/vf_btn_get2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GET fromCallable"/>
+
+    <Button
+        android:id="@+id/vf_btn_get3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GET fromFuture"/>
+
+    <ListView
+        android:id="@+id/vf_lv_log"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        />
+</LinearLayout>

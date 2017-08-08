@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_polling"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="polling (3s)"/>
+
+    <Button
+        android:id="@+id/btn_polling2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="polling (3sec + operation) "/>
+
+    <ListView
+        android:id="@+id/lv_polling_log"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        />
+</LinearLayout>

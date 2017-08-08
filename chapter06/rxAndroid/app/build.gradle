@@ -1,0 +1,81 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'me.tatarka:gradle-retrolambda:3.4.0'
+    }
+}
+
+apply plugin: 'com.android.application'
+
+apply plugin: 'me.tatarka.retrolambda'
+
+ext {
+    sdkVersion= 24
+    supportLibVersion= "24.2.1"
+}
+
+android {
+    compileSdkVersion sdkVersion
+    buildToolsVersion "23.0.3"
+    defaultConfig {
+        applicationId "com.pandora.rxandroid"
+        minSdkVersion 15
+        targetSdkVersion sdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    packagingOptions {
+        pickFirst 'META-INF/rxjava.properties'
+    }
+}
+
+dependencies {
+    compile "com.android.support:appcompat-v7:${supportLibVersion}"
+    //
+    compile "com.android.support:recyclerview-v7:${supportLibVersion}"
+    //
+    testCompile 'junit:junit:4.12'
+    compile 'org.projectlombok:lombok:1.16.14'
+    // ----------------------------------
+    //  Rx dependencies
+    // RxJava 1.x to 2.x
+    // ----------------------------------
+    //  Utils dependencies
+    // rxJava 2.x
+    compile 'io.reactivex.rxjava2:rxjava:2.0.4'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    // rxJava 1.x -> 2.x
+    compile 'com.github.akarnokd:rxjava2-interop:0.9.1'
+    // rxlifecycle 2.x
+    compile 'com.trello.rxlifecycle2:rxlifecycle:2.0.1'
+    compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.0.1'
+    compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.0.1'
+    // Utils
+    compile 'com.jakewharton.rxbinding:rxbinding:1.0.0'
+    compile 'com.jakewharton.timber:timber:4.4.0'
+    // butterknife
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    // volley
+    compile 'com.android.volley:volley:1.0.0'
+    // okhttp
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    // retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+
+}
