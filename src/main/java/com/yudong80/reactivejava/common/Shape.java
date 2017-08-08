@@ -85,4 +85,12 @@ public class Shape {
 	public static String rectangle(String color) { 
 		return color + "-R";
 	}	
+	
+	public static String star(String color) { 
+		return color + "-S";
+	}
+	
+	public static String pentagon(String color) { 
+		return color + "-P";
+	}
 }

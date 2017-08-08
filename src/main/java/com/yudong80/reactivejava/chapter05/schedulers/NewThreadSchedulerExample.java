@@ -6,9 +6,13 @@ import com.yudong80.reactivejava.common.Log;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.BLUE;
+
 public class NewThreadSchedulerExample {
 	public void basic() { 
-		String[] orgs = {"RED", "GREEN", "BLUE"};
+		String[] orgs = {RED, GREEN, BLUE};
 		Observable.fromArray(orgs)
 			.doOnNext(data -> Log.v("Original data : " + data))
 			.map(data -> "<<" + data + ">>")

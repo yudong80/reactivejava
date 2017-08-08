@@ -8,9 +8,13 @@ import com.yudong80.reactivejava.common.Log;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.BLUE;
+
 public class ComputationSchedulerExample {
 	public void basic() { 
-		String[] orgs = {"RED", "GREEN", "BLUE"};
+		String[] orgs = {RED, GREEN, BLUE};
 		Observable<String> source = Observable.fromArray(orgs)
 			.zipWith(Observable.interval(100L, TimeUnit.MILLISECONDS), 
 					(a,b) -> a);

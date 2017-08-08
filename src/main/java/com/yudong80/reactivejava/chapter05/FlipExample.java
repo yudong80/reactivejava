@@ -8,10 +8,17 @@ import com.yudong80.reactivejava.common.Shape;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.YELLOW;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.star;
+import static com.yudong80.reactivejava.common.Shape.triangle;
+import static com.yudong80.reactivejava.common.Shape.pentagon;
+
 public class FlipExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() {
-		String[] objs = {"RED-S", "YELLOW-T", "GREEN-P"};
+		String[] objs = {star(RED), triangle(YELLOW), pentagon(GREEN)};
 		Observable<String> source = Observable.fromArray(objs)
 				.doOnNext(data -> Log.v("Origianl data = " + data))
 				.subscribeOn(Schedulers.newThread())
@@ -23,7 +30,7 @@ public class FlipExample implements MarbleDiagram{
 	}
 
 	public void observeOnRemoved() {
-		String[] objs = {"RED-S", "YELLOW-T", "GREEN-P"};
+		String[] objs = {star(RED), triangle(YELLOW), pentagon(GREEN)};
 		Observable<String> source = Observable.fromArray(objs)
 				.doOnNext(data -> Log.v("Origianl data = " + data))
 				.subscribeOn(Schedulers.newThread())
