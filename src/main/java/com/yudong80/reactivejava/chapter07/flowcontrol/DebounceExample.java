@@ -1,5 +1,10 @@
 package com.yudong80.reactivejava.chapter07.flowcontrol;
 
+import static com.yudong80.reactivejava.common.Shape.BLUE;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.YELLOW;
+
 import java.util.concurrent.TimeUnit;
 
 import com.yudong80.reactivejava.common.CommonUtils;
@@ -11,7 +16,7 @@ import io.reactivex.Observable;
 public class DebounceExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() {
-		String[] data = {"RED", "YELLOW", "GREEN", "BLUE"};
+		String[] data = {RED, YELLOW, GREEN, BLUE};
 		
 		Observable<String> source = Observable.concat(
 			Observable.timer(100L, TimeUnit.MILLISECONDS).map(i -> data[0]),

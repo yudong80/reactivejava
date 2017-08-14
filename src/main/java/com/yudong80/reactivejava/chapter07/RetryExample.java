@@ -8,7 +8,6 @@ import com.yudong80.reactivejava.common.OkHttpHelper;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableSource;
 import io.reactivex.schedulers.Schedulers;
 
 public class RetryExample {
@@ -67,7 +66,7 @@ public class RetryExample {
 	}
 	
 	public void retryWhen() { 
-		 Observable.create((ObservableEmitter<String> emitter) -> {
+        Observable.create((ObservableEmitter<String> emitter) -> {
 		      System.out.println("subscribing");
 		      emitter.onError(new RuntimeException("always fails"));
 		  }).retryWhen(attempts -> {
@@ -76,11 +75,12 @@ public class RetryExample {
 		          return Observable.timer(i, TimeUnit.SECONDS);
 		      });
 		  }).blockingForEach(System.out::println);
+        CommonUtils.exampleComplete();		
 	}
 	
 	public static void main(String[] args) { 
 		RetryExample demo = new RetryExample();
-		demo.retry5();
+//		demo.retry5();
 //		demo.retryWithDelay();
 //		demo.retryUntil();
 //		demo.retryWhen();

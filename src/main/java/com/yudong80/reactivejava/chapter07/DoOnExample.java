@@ -6,13 +6,18 @@ import com.yudong80.reactivejava.common.CommonUtils;
 import com.yudong80.reactivejava.common.Log;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.BLUE;
+import static com.yudong80.reactivejava.common.Shape.YELLOW;
+import static com.yudong80.reactivejava.common.Shape.PUPPLE;
+
 public class DoOnExample {
 	public void basic() { 
-		String[] orgs = {"RED", "GREEN", "BLUE"};
+		String[] orgs = {RED, GREEN, BLUE};
 		Observable<String> source = Observable.fromArray(orgs);
 		
 		source.doOnNext(data -> Log.d("onNext()", data))
@@ -35,7 +40,7 @@ public class DoOnExample {
 	}
 	
 	public void doOnEach() { 
-		String[] orgs = {"RED", "GREEN", "BLUE"};
+		String[] orgs = {RED, GREEN, BLUE};
 		Observable<String> source = Observable.fromArray(orgs);
 		
 		source.doOnEach(noti -> {
@@ -48,7 +53,7 @@ public class DoOnExample {
 	}
 	
 	public void doOnEachObserver() { 
-		String[] orgs = {"RED", "GREEN", "BLUE"};
+		String[] orgs = {RED, GREEN, BLUE};
 		Observable<String> source = Observable.fromArray(orgs);
 		
 		source.doOnEach(new Observer<String>() {
@@ -76,7 +81,7 @@ public class DoOnExample {
 	}
 	
 	public void doOnSubscribeAndDispose() { 
-		String[] orgs = {"RED", "GREEN", "BLUE", "YELLOW", "PUPPLE"};
+		String[] orgs = {RED, GREEN, BLUE, YELLOW, PUPPLE};
 		Observable<String> source = Observable.fromArray(orgs)
 			.zipWith(Observable.interval(100L, TimeUnit.MILLISECONDS), 
 					(a,b) -> a)
@@ -91,7 +96,7 @@ public class DoOnExample {
 	}
 	
 	public void doOnLifecycle() { 
-		String[] orgs = {"RED", "GREEN", "BLUE", "YELLOW", "PUPPLE"};
+		String[] orgs = {RED, GREEN, BLUE, YELLOW, PUPPLE};
 		Observable<String> source = Observable.fromArray(orgs)
 			.zipWith(Observable.interval(100L, TimeUnit.MILLISECONDS), 
 					(a,b) -> a)
@@ -107,7 +112,7 @@ public class DoOnExample {
 	}
 	
 	public void doOnTerminate() { 
-		String[] orgs = {"RED", "GREEN", "BLUE"};
+		String[] orgs = {RED, GREEN, BLUE};
 		Observable<String> source = Observable.fromArray(orgs);
 		
 		source.doOnTerminate(() -> Log.d("onTerminate()"))
@@ -123,8 +128,8 @@ public class DoOnExample {
 //		demo.withError();
 //		demo.doOnEach();
 //		demo.doOnEachObserver();
-//		demo.doOnSubscribeAndDispose();
-//		demo.doOnLifecycle();
-		demo.doOnTerminate();
+		demo.doOnSubscribeAndDispose();
+		demo.doOnLifecycle();
+//		demo.doOnTerminate();
 	}
 }

@@ -1,5 +1,11 @@
 package com.yudong80.reactivejava.chapter07.flowcontrol;
 
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.ORANGE;
+import static com.yudong80.reactivejava.common.Shape.PUPPLE;
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.YELLOW;
+
 import java.util.concurrent.TimeUnit;
 
 import com.yudong80.reactivejava.common.CommonUtils;
@@ -11,7 +17,7 @@ import io.reactivex.Observable;
 public class SampleExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() {
-		String[] data = {"RED", "ORANGE", "YELLOW", "GREEN", "PUPPLE"};
+		String[] data = {RED, ORANGE, YELLOW, GREEN, PUPPLE};
 		
 		CommonUtils.exampleStart();
 		//앞의 4개는 100ms 간격으로 발행 
@@ -35,7 +41,7 @@ public class SampleExample implements MarbleDiagram{
 	}
 
 	public void emitLast() {
-		String[] data = {"RED", "ORANGE", "YELLOW", "GREEN", "PUPPLE"};
+		String[] data = {RED, ORANGE, YELLOW, GREEN, PUPPLE};
 		
 		CommonUtils.exampleStart();
 		//앞의 4개는 100ms 간격으로 발행 
@@ -60,7 +66,7 @@ public class SampleExample implements MarbleDiagram{
 	
 	public static void main(String[] args) { 
 		SampleExample demo = new SampleExample();
-//		demo.marbleDiagram();
-		demo.emitLast();
+		demo.marbleDiagram();
+//		demo.emitLast();
 	}
 }

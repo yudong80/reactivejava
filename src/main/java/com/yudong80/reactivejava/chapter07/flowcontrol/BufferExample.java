@@ -1,5 +1,12 @@
 package com.yudong80.reactivejava.chapter07.flowcontrol;
 
+import static com.yudong80.reactivejava.common.Shape.BLUE;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.PUPPLE;
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.SKY;
+import static com.yudong80.reactivejava.common.Shape.YELLOW;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -12,7 +19,7 @@ import io.reactivex.Observable;
 public class BufferExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() {
-		String[] data = {"RED", "YELLOW", "GREEN", "SKY", "BLUE", "PUPPLE"};
+		String[] data = {RED, YELLOW, GREEN, SKY, BLUE, PUPPLE};
 		CommonUtils.exampleStart();
 		
 		//앞의 3개는 100ms 간격으로 발행 
@@ -41,7 +48,7 @@ public class BufferExample implements MarbleDiagram{
 	}
 
 	public void bufferSkip() { 
-		String[] data = {"RED", "YELLOW", "GREEN", "SKY", "BLUE", "PUPPLE"};
+		String[] data = {RED, YELLOW, GREEN, SKY, BLUE, PUPPLE};
 		CommonUtils.exampleStart();
 		
 		//앞의 3개는 100ms 간격으로 발행 
@@ -71,8 +78,8 @@ public class BufferExample implements MarbleDiagram{
 	
 	public static void main(String[] args) { 
 		BufferExample demo = new BufferExample();
-//		demo.marbleDiagram();
-		demo.bufferSkip();
+		demo.marbleDiagram();
+//		demo.bufferSkip();
 	}
 }
 

@@ -8,10 +8,17 @@ import com.yudong80.reactivejava.common.MarbleDiagram;
 
 import io.reactivex.Observable;
 
+import static com.yudong80.reactivejava.common.Shape.BLUE;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.PUPPLE;
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.SKY;
+import static com.yudong80.reactivejava.common.Shape.YELLOW;
+
 public class WindowExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() {
-		String[] data = {"RED", "YELLOW", "GREEN", "SKY", "BLUE", "PUPPLE"};
+		String[] data = {RED, YELLOW, GREEN, SKY, BLUE, PUPPLE};
 		CommonUtils.exampleStart();
 		
 		//앞의 3개는 100ms 간격으로 발행 
