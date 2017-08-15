@@ -1,4 +1,4 @@
-package com.yudong80.reactivejava.chapter07;
+package com.yudong80.reactivejava.chapter08;
 
 import com.yudong80.reactivejava.common.CommonUtils;
 import com.yudong80.reactivejava.common.Log;
@@ -77,9 +77,9 @@ public class BackpressureExample {
 	
 	public static void main(String[] args) { 
 		BackpressureExample demo = new BackpressureExample();
-//		demo.makeBackpressure();
+		demo.makeBackpressure();
 //		demo.usingBuffer();
 //		demo.usingDrop();
-		demo.usingLatest();
+//		demo.usingLatest();
 	}
 }

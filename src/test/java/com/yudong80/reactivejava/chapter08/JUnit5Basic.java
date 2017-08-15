@@ -11,11 +11,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 
-import com.yudong80.reactivejava.common.CommonUtils;
 import com.yudong80.reactivejava.common.Log;
 import com.yudong80.reactivejava.common.Shape;
 
 import io.reactivex.Observable;
+
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.YELLOW;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.rectangle;
+import static com.yudong80.reactivejava.common.Shape.triangle;
 
 @RunWith(JUnitPlatform.class)
 public class JUnit5Basic {
@@ -30,7 +35,7 @@ public class JUnit5Basic {
 	@DisplayName("test getShape() Observable")
 	@Test
 	void testGetShapeObservable() { 
-		String[] data = {"RED", "BLUE-R", "YELLOW-T"};
+		String[] data = {RED, rectangle(YELLOW), triangle(YELLOW)};
 		Observable<String> source = Observable.fromArray(data)
 				.map(Shape::getShape);
 		

@@ -10,13 +10,19 @@ import com.yudong80.reactivejava.common.Shape;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.YELLOW;
+import static com.yudong80.reactivejava.common.Shape.BLUE;
+import static com.yudong80.reactivejava.common.Shape.rectangle;
+import static com.yudong80.reactivejava.common.Shape.triangle;
+
 @RunWith(JUnitPlatform.class)
 public class TestObserverExample {
 	
 	@DisplayName("#1: using TestObserver for Shape.getShape()")
 	@Test
 	void testGetShapeUsingTestObserver() { 
-		String[] data = {"RED", "BLUE-R", "YELLOW-T"};
+		String[] data = {RED, rectangle(BLUE), triangle(YELLOW)};
 		Observable<String> source = Observable.fromArray(data)
 				.map(Shape::getShape);
 
