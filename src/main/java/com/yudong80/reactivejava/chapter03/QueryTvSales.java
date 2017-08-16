@@ -25,7 +25,7 @@ public class QueryTvSales {
 				.map(sale -> sale.getRight())
 				//3. TV 매출의 합을 구함 
 				.reduce((sale1, sale2) -> sale1 + sale2);		
-		tvSales.subscribe(tot -> System.out.println("TV Sales: " + tot + "$"));		
+		tvSales.subscribe(tot -> System.out.println("TV Sales: $" + tot));		
 		CommonUtils.exampleComplete();		
 	}
 	
