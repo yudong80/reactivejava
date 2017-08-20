@@ -5,14 +5,18 @@ import com.yudong80.reactivejava.common.CommonUtils;
 import io.reactivex.Observable;
 import io.reactivex.subjects.AsyncSubject;
 
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.BLUE;
+
 public class AsyncSubjectExample {
 	public void marbleDiagram() { 
 		AsyncSubject<String> subject = AsyncSubject.create();
 		subject.subscribe(data -> System.out.println("Subscriber #1 => "+ data));
-		subject.onNext("RED");
-		subject.onNext("GREEN");
+		subject.onNext(RED);
+		subject.onNext(GREEN);
 		subject.subscribe(data -> System.out.println("Subscriber #2 => "+ data));
-		subject.onNext("BLUE");
+		subject.onNext(BLUE);
 		subject.onComplete();
 		CommonUtils.exampleComplete();
 	}

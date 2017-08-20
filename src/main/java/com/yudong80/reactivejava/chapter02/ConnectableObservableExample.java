@@ -8,10 +8,14 @@ import com.yudong80.reactivejava.common.MarbleDiagram;
 import io.reactivex.Observable;
 import io.reactivex.observables.ConnectableObservable;
 
+import static com.yudong80.reactivejava.common.Shape.RED;
+import static com.yudong80.reactivejava.common.Shape.GREEN;
+import static com.yudong80.reactivejava.common.Shape.BLUE;
+
 public class ConnectableObservableExample implements MarbleDiagram{
 	@Override
 	public void marbleDiagram() { 
-		String[] dt = {"RED", "GREEN", "BLUE"}; 
+		String[] dt = {RED, GREEN, BLUE}; 
 		Observable<String> balls = Observable.interval(100L, TimeUnit.MILLISECONDS)
 				.map(Long::intValue)
 				.map(i -> dt[i])

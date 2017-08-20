@@ -3,8 +3,8 @@ package com.yudong80.reactivejava.chapter02;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 
-public class ObservableLifecycleV1 {
-	public void lifecycle() { 
+public class ObservableNotifications {
+	public void basic() { 
 		Observable<String> source = Observable.just("RED", "GREEN", "YELLOW");
 		
 		Disposable d = source.subscribe(
@@ -17,8 +17,8 @@ public class ObservableLifecycleV1 {
 	}
 	
 	public static void main(String[] args) { 
-		ObservableLifecycleV1 demo = new ObservableLifecycleV1();
-		demo.lifecycle();
+		ObservableNotifications demo = new ObservableNotifications();
+		demo.basic();
 	}
 
 }

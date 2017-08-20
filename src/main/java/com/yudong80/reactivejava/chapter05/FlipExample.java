@@ -20,7 +20,7 @@ public class FlipExample implements MarbleDiagram{
 	public void marbleDiagram() {
 		String[] objs = {star(RED), triangle(YELLOW), pentagon(GREEN)};
 		Observable<String> source = Observable.fromArray(objs)
-				.doOnNext(data -> Log.v("Origianl data = " + data))
+				.doOnNext(data -> Log.v("Original data = " + data))
 				.subscribeOn(Schedulers.newThread())
 				.observeOn(Schedulers.newThread())
 				.map(Shape::flip);

@@ -11,6 +11,7 @@ import static com.yudong80.reactivejava.common.Shape.GREEN;
 import static com.yudong80.reactivejava.common.Shape.RED;
 import static com.yudong80.reactivejava.common.Shape.SKY;
 import static com.yudong80.reactivejava.common.Shape.YELLOW;
+import static com.yudong80.reactivejava.common.Shape.rectangle;
 
 public class AllFunctionExample implements MarbleDiagram{
 	@Override
@@ -24,8 +25,23 @@ public class AllFunctionExample implements MarbleDiagram{
 		source.subscribe(Log::i);
 	}
 	
+	public void wrongCase() { 
+		String[] data = {RED, rectangle(YELLOW), GREEN, SKY};
+		
+		Single<Boolean> source = Observable.fromArray(data)
+			.map(Shape::getShape)
+			.doOnNext(Log::d)
+			.doOnComplete(() -> Log.d("onComplete"))
+			.all(Shape.BALL::equals)
+			.doOnSuccess(v -> Log.d("onSuccess : val = " + v));
+		
+			//.all(val -> Shape.BALL.equals(Shape.getShape(val)));
+		source.subscribe(Log::i);		
+	}
+	
 	public static void main(String[] args) { 
 		AllFunctionExample demo = new AllFunctionExample();
 		demo.marbleDiagram();
+		demo.wrongCase();
 	}
 }
