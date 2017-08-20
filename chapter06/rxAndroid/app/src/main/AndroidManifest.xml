@@ -9,7 +9,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <!--<activity android:name=".activities.AsyncTaskActivity">-->
+        <!--<activity android:name=".activities.TimerActivity">-->
+        <!--<activity android:name=".MainActivity">-->
+        <activity android:name=".activities.HelloRxAppActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

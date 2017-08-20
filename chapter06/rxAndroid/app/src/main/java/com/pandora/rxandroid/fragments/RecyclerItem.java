@@ -6,8 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
+@AllArgsConstructor(staticName = "of")
 class RecyclerItem {
-    Drawable image;
-    String title;
+    private Drawable image;
+    private String title;
 }

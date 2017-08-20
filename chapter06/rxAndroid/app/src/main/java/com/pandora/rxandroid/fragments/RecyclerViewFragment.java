@@ -93,7 +93,7 @@ public class RecyclerViewFragment extends Fragment {
                 .map(item -> {
                     Drawable image = item.activityInfo.loadIcon(pm);
                     String title = item.activityInfo.loadLabel(pm).toString();
-                    return new RecyclerItem(image, title);
+                    return RecyclerItem.of(image, title);
                 });
     }
 

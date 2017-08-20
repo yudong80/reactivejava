@@ -114,7 +114,7 @@ public class OkHttpFragment extends Fragment {
      */
     private void startOkHttp() {
         GitHubServiceApi service = RestfulAdapter.getInstance().getServiceApi();
-        Call<List<Contributor>> call = service.getCallContributors("jungjoonpark-pandora", "rxAndroid");
+        Call<List<Contributor>> call = service.getCallContributors(sName, sRepo);
 
         call.enqueue(new Callback<List<Contributor>>() {
             @Override

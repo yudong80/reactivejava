@@ -15,8 +15,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.jakewharton.rxbinding.widget.RxTextView;
-import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
+import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
 import com.pandora.rxandroid.R;
 import com.pandora.rxandroid.logs.LogAdapter;
 
@@ -76,9 +76,7 @@ public class DebounceSearchFragment extends Fragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(getObserver());
 
-        // RxView의 Library를 이용하면 간단히 TextWatcher와 같은 추가 구현이 필요 없다.
-        // RxView는 현재까지 2.x를 지원하지 못하고 있다. RxJavaInterop이용하여 변환해 준다.
-        mDisposable = RxJavaInterop.toV2Observable(RxTextView.textChangeEvents(mSearchBox))
+        mDisposable = RxTextView.textChangeEvents(mSearchBox)
                 .debounce(400, TimeUnit.MILLISECONDS)
                 .filter(s -> !TextUtils.isEmpty(s.text().toString()))
                 .observeOn(AndroidSchedulers.mainThread())
@@ -138,8 +136,6 @@ public class DebounceSearchFragment extends Fragment {
             }
         };
     }
-
-
 
     private void log(String log) {
         mLogs.add(log);
