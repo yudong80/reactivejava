@@ -15,7 +15,7 @@ public class TimeIntervalExample implements MarbleDiagram{
 		CommonUtils.exampleStart();
 		Observable<Timed<String>> source = Observable.fromArray(data)
 			.delay(item -> { 
-				CommonUtils.sleepRandom(100);
+				CommonUtils.doSomething();
 				return Observable.just(item);
 			})
 			.timeInterval();

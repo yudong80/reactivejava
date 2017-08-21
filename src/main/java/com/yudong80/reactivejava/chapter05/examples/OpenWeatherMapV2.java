@@ -9,6 +9,7 @@ import com.yudong80.reactivejava.common.OkHttpHelper;
 
 import io.reactivex.Observable;
 import io.reactivex.observables.ConnectableObservable;
+import io.reactivex.schedulers.Schedulers;
 
 import static com.yudong80.reactivejava.common.CommonUtils.API_KEY;
 
@@ -16,25 +17,20 @@ import static com.yudong80.reactivejava.common.CommonUtils.API_KEY;
 public class OpenWeatherMapV2 {
 	private static final String URL = "http://api.openweathermap.org/data/2.5/weather?q=London&APPID=";
 	
-	//-> ConnectableObservable로 변경 
 	public void run() { 
-		Observable<String> source = Observable.just(URL + API_KEY)
-				.map(OkHttpHelper::getWithLog);
-		
-		//어떻게 호출을 한번만 하게 할 수 있을까? 
-		ConnectableObservable<String> connectable = source.publish();
 		CommonUtils.exampleStart();
-		StringBuilder sb = new StringBuilder();
 
-		connectable.map(this::parseTemperature)
-			       .subscribe(v -> sb.append(v + "\n"));
-		connectable.map(this::parseCityName)
-		           .subscribe(v -> sb.append(v + "\n"));
-		connectable.map(this::parseCountry)
-		           .subscribe(v -> sb.append(v + "\n"));
-		connectable.connect();		
+		Observable<String> source = Observable.just(URL + API_KEY)
+				.map(OkHttpHelper::getWithLog)
+				.subscribeOn(Schedulers.io())
+				.share()
+				.observeOn(Schedulers.newThread());
 		
-		Log.i(sb.toString());
+		source.map(this::parseTemperature).subscribe(Log::it);
+		source.map(this::parseCityName).subscribe(Log::it);
+		source.map(this::parseCountry).subscribe(Log::it);
+		
+		CommonUtils.sleep(1000);
 	}
 	
 	private String parseTemperature(String json) { 

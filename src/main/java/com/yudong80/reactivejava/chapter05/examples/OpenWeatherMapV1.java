@@ -8,6 +8,8 @@ import com.yudong80.reactivejava.common.Log;
 import com.yudong80.reactivejava.common.OkHttpHelper;
 
 import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
+
 import static com.yudong80.reactivejava.common.CommonUtils.API_KEY;
 
 
@@ -16,7 +18,8 @@ public class OpenWeatherMapV1 {
 	
 	public void run() { 
 		Observable<String> source = Observable.just(URL + API_KEY)
-				.map(OkHttpHelper::getWithLog);
+				.map(OkHttpHelper::getWithLog)
+				.subscribeOn(Schedulers.io());
 		
 		//어떻게 호출을 한번만 하게 할 수 있을까? 
 		Observable<String> temperature = source.map(this::parseTemperature);
@@ -27,7 +30,10 @@ public class OpenWeatherMapV1 {
 		Observable.concat(temperature, 
 				city, 
 				country)
+				.observeOn(Schedulers.newThread())
 				.subscribe(Log::it);
+		
+		CommonUtils.sleep(1000);
 	}
 	
 	private String parseTemperature(String json) { 
