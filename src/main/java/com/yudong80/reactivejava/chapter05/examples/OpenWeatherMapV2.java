@@ -20,15 +20,18 @@ public class OpenWeatherMapV2 {
 	public void run() { 
 		CommonUtils.exampleStart();
 
-		Observable<String> source = Observable.just(URL + API_KEY)
+		ConnectableObservable<String> source = Observable.just(URL + API_KEY)
 				.map(OkHttpHelper::getWithLog)
 				.subscribeOn(Schedulers.io())
 				.share()
-				.observeOn(Schedulers.newThread());
-		
+				.observeOn(Schedulers.newThread())
+				.publish();
+
 		source.map(this::parseTemperature).subscribe(Log::it);
 		source.map(this::parseCityName).subscribe(Log::it);
 		source.map(this::parseCountry).subscribe(Log::it);
+
+		source.connect();
 		
 		CommonUtils.sleep(1000);
 	}
