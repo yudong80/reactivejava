@@ -18,7 +18,8 @@ public class ElectricBills {
 	public void electricBillV1() { 
 		String[] data = {
 			"100",  //910 + 93.3 * 100 = 10,240원  
-			"300"   //1600 + 93.3 * 200 + 187.9 * 100 = 39,050원 
+			"300",  //1600 + 93.3 * 200 + 187.9 * 100 = 39,050원 
+ 			"800",  //7300 + 93.3 * 200 + 187.9 * 200 + 280.65 * 200 = 175,800원
 		};
 		
 		Observable<Integer> basePrice = Observable.fromArray(data)
@@ -34,7 +35,7 @@ public class ElectricBills {
 				.map(val -> { 
 					double series1 = min(200, val) * 93.3;
 					double series2 = min(200, max(val-200, 0)) * 187.9;
-					double series3 = min(0, max(val-400, 0)) * 280.65;
+					double series3 = max(0, max(val-400, 0)) * 280.65;
 					return (int)(series1 + series2 + series3);
 				});
 		
@@ -59,7 +60,8 @@ public class ElectricBills {
 	public void electricBillV2() { 
 		String[] data = {
 			"100",  //910 + 93.3 * 100 = 10,240원  
-			"300"   //1600 + 93.3 * 200 + 187.9 * 100 = 39,050원 
+			"300",  //1600 + 93.3 * 200 + 187.9 * 100 = 39,050원
+			"800",  //7300 + 93.3 * 200 + 187.9 * 200 + 280.65 * 200 = 175,800원 
 		};
 		
 		Observable<Integer> basePrice = Observable.fromArray(data)
@@ -75,7 +77,7 @@ public class ElectricBills {
 				.map(val -> { 
 					double series1 = min(200, val) * 93.3;
 					double series2 = min(200, max(val-200, 0)) * 187.9;
-					double series3 = min(0, max(val-400, 0)) * 280.65;
+					double series3 = max(0, max(val-400, 0)) * 280.65;
 					return (int)(series1 + series2 + series3);
 				});
 		
