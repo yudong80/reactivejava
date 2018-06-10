@@ -32,7 +32,7 @@ public class Gugudan {
 		
 		Function<Integer,Observable<String>> gugudan = num -> 
 			Observable.range(1,9)
-			   		  .map(row -> num + " * " + row + " = " + dan*row);			
+			   		  .map(row -> num + " * " + row + " = " + num*row);			
 		Observable<String> source = Observable.just(dan).flatMap(gugudan);
 		source.subscribe(System.out::println);
 		in.close();
