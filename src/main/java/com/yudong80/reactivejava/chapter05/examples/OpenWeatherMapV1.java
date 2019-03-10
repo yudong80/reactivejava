@@ -33,7 +33,7 @@ public class OpenWeatherMapV1 {
 				.observeOn(Schedulers.newThread())
 				.subscribe(Log::it);
 		
-		CommonUtils.sleep(1000);
+		CommonUtils.sleep(3000);
 	}
 	
 	private String parseTemperature(String json) { 

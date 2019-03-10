@@ -30,7 +30,7 @@ public class OpenWeatherMapV2 {
 		source.map(this::parseCityName).subscribe(Log::it);
 		source.map(this::parseCountry).subscribe(Log::it);
 		
-		CommonUtils.sleep(1000);
+		CommonUtils.sleep(3000);
 	}
 	
 	private String parseTemperature(String json) { 
