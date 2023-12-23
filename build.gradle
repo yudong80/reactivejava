@@ -4,16 +4,16 @@ repositories {
 }
 
 dependencies {
-    compile 'org.slf4j:slf4j-api:1.7.21'
-    testCompile 'junit:junit:4.12'
-    compile 'io.reactivex.rxjava2:rxjava:2.2.7'
-    compile 'com.squareup.retrofit2:retrofit:2.0.2'
-	compile 'com.squareup.retrofit2:converter-gson:2.0.2'
-	compile 'com.squareup.okhttp3:okhttp:3.2.0'
-	compile 'org.apache.commons:commons-lang3:3.1'
-	compile "com.github.akarnokd:rxjava2-extensions:0.17.5"
+    implementation 'org.slf4j:slf4j-api:1.7.21'
+    testImplementation 'junit:junit:4.12'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.7'
+    implementation 'com.squareup.retrofit2:retrofit:2.0.2'
+	implementation 'com.squareup.retrofit2:converter-gson:2.0.2'
+	implementation 'com.squareup.okhttp3:okhttp:3.2.0'
+	implementation 'org.apache.commons:commons-lang3:3.1'
+	testImplementation "com.github.akarnokd:rxjava2-extensions:0.17.5"
 	
-	testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.0-RC2'
-	testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.0-RC2'
-	testCompile 'org.junit.platform:junit-platform-runner:1.0.0-RC2'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.0.0-RC2'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.0.0-RC2'
+	testImplementation 'org.junit.platform:junit-platform-runner:1.0.0-RC2'
 }
